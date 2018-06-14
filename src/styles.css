@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+input[type="text"]:focus {
+    border-color: darkslateblue
+}
+
+input[type="text"]:hover {
+    border-color: darkslateblue
+}
+
+select:hover {
+    border-color: darkslateblue
+}
