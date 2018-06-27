@@ -27,7 +27,7 @@ export class Student {
         this.name = name;
     }
     public getGender(): string {
-        return this.gender == GenderEnum.FEMALE ? 'Nữ' : 'Name';
+        return this.gender == GenderEnum.FEMALE ? 'Nữ' : 'Nam';
     }
     public setGender(gender: GenderEnum): void {
         this.gender = gender;
