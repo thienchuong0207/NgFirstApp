@@ -1,21 +1,4 @@
-<form style="margin-left: 1%">
-    <div class="form-group">
-        <label style="color: darkslateblue">Mã số</label>
-        <input type="text" id="studentId" name="studentId" class="form-control" style="width: 30%; color: darkslateblue" [(ngModel)]="studentDTO.id" readonly/>
-    </div>
-    <div class="form-group">
-        <label style="color: darkslateblue">Họ Tên</label>
-        <input type="text" id="studentName" name="studentName" class="form-control" style="width: 30%; color: darkslateblue" [(ngModel)]="studentDTO.name"/>
-    </div>
-    <div class="form-group">
-        <label style="color: darkslateblue">Giới Tính</label>
-        <select class="form-control" style="width: 8%; color: darkslateblue" name="studentGender" [(ngModel)]="studentDTO.gender">
-            <option value="0">Nữ</option>
-            <option value="1">Nam</option>
-        </select>
-    </div>
-    <button type="button" class="btn btn-primary" (click)="onCreateStudent()" style="background-color: darkslateblue">Thêm mới</button>
-</form>
+<app-student-form (onStudentCreatedEventEmitter)="onStudentAdded($event)"></app-student-form>
 <hr/>
 <table class="table table-condensed table-hover" style="width: 50%; margin-left: 1%">
     <thead>
@@ -32,7 +15,7 @@
             <td style="color: darkslateblue">{{student.name}}</td>
             <td style="color: darkslateblue">{{student.getGender()}}</td>
             <td><img id="deleteStudent" name="deleteStudent" src="../../assets/img/delete.png" width="16px" height="16px"
-                (click)="onDeleteStudent(student.id)"/></td>
+                (click)="onStudentRemoved(student.id)"/></td>
         </tr>
     </tbody>
 </table>
