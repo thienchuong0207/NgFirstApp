@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 import { Student as Student } from '../model/Student';
 import { GenderEnum as GenderEnum } from '../util/GenderEnum';
@@ -6,16 +6,25 @@ import { GenderEnum as GenderEnum } from '../util/GenderEnum';
 @Component({
     selector: 'app-class',
     templateUrl: './class.component.html',
-    styleUrls: ['./class.component.css']
+    styleUrls: ['./class.component.css'],
+    encapsulation: ViewEncapsulation.Emulated
 })
 export class ClassComponent {
+
     /* Properties */
     private id: number = 1;
     private name: string = "9/8";
     private students: Student[] = [];
+    
     /* Constructor */
     constructor() {}
-    /* Functionalities */
+    
+    /* Functions */
+    
+    /**
+     * Add new student to Student List
+     * @param event
+     */
     public onStudentAdded(event: {newStudent: Student}): boolean {
         let isDone: boolean = false;
         try {
@@ -26,7 +35,11 @@ export class ClassComponent {
         }
         return isDone;
     }
-    
+
+    /**
+     * Remove a student from Student List
+     * @param selectedStudentId 
+     */
     public onStudentRemoved(selectedStudentId: number): boolean {
         let isDone: boolean = false;
         try {
