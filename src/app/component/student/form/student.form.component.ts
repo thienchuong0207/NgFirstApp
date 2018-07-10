@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
-import { Student } from '../../model/Student';
-import { GenderEnum } from '../../util/GenderEnum';
+import { Student } from '../../../model/Student';
+import { GenderEnum } from '../../../util/GenderEnum';
 
 @Component({
     selector: 'app-student-form',

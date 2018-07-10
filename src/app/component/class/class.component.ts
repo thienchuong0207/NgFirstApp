@@ -1,12 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import { Student as Student } from '../model/Student';
-import { GenderEnum as GenderEnum } from '../util/GenderEnum';
+import { Student as Student } from '../../model/Student';
+import { GenderEnum as GenderEnum } from '../../util/GenderEnum';
+import { LoggingService } from '../../service/LoggingService';
 
 @Component({
     selector: 'app-class',
     templateUrl: './class.component.html',
     styleUrls: ['./class.component.css'],
+    providers: [LoggingService],
     encapsulation: ViewEncapsulation.Emulated
 })
 export class ClassComponent {
@@ -16,9 +18,14 @@ export class ClassComponent {
     private name: string = "9/8";
     private students: Student[] = [];
     
+    /* Dependencies */
+    private loggingService: LoggingService;
+
     /* Constructor */
-    constructor() {}
-    
+    constructor(loggingService: LoggingService) {
+        this.loggingService = loggingService;
+    }
+
     /* Functions */
     
     /**
@@ -26,12 +33,14 @@ export class ClassComponent {
      * @param event
      */
     public onStudentAdded(event: {newStudent: Student}): boolean {
+        this.loggingService.info("ClassComponent.onStudentAdded(): processing");
         let isDone: boolean = false;
         try {
             this.students.push(event.newStudent);
             isDone = true;
+            this.loggingService.info("ClassComponent.onStudentAdded(): DONE");
         } catch(ex) {
-            console.error('ClassComponent.addNewStudent(): ', ex);
+            this.loggingService.error(ex);
         }
         return isDone;
     }
@@ -41,6 +50,7 @@ export class ClassComponent {
      * @param selectedStudentId 
      */
     public onStudentRemoved(selectedStudentId: number): boolean {
+        this.loggingService.info("ClassComponent.onStudentRemoved(): processing");
         let isDone: boolean = false;
         try {
             if (this.students && this.students.length > 0) {
@@ -54,8 +64,9 @@ export class ClassComponent {
                     }
                 });
             }
+            this.loggingService.info("ClassComponent.onStudentRemoved(): DONE");
         } catch(ex) {
-            console.error('ClassComponent.onDeleteStudent(): ', ex);
+            this.loggingService.error(ex);
         }
         return isDone;
     }
