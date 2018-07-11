@@ -2,13 +2,13 @@ import { Component, ViewEncapsulation } from '@angular/core';
 
 import { Student as Student } from '../../model/Student';
 import { GenderEnum as GenderEnum } from '../../util/GenderEnum';
-import { LoggingService } from '../../service/LoggingService';
+import { ClassService } from '../../service/ClassService';
 
 @Component({
     selector: 'app-class',
     templateUrl: './class.component.html',
     styleUrls: ['./class.component.css'],
-    providers: [LoggingService],
+    providers: [ClassService],
     encapsulation: ViewEncapsulation.Emulated
 })
 export class ClassComponent {
@@ -17,13 +17,13 @@ export class ClassComponent {
     private id: number = 1;
     private name: string = "9/8";
     private students: Student[] = [];
-    
+
     /* Dependencies */
-    private loggingService: LoggingService;
+    private classService: ClassService;
 
     /* Constructor */
-    constructor(loggingService: LoggingService) {
-        this.loggingService = loggingService;
+    constructor(classService: ClassService) {
+        this.classService = classService;
     }
 
     /* Functions */
@@ -32,42 +32,21 @@ export class ClassComponent {
      * Add new student to Student List
      * @param event
      */
-    public onStudentAdded(event: {newStudent: Student}): boolean {
-        this.loggingService.info("ClassComponent.onStudentAdded(): processing");
-        let isDone: boolean = false;
-        try {
-            this.students.push(event.newStudent);
-            isDone = true;
-            this.loggingService.info("ClassComponent.onStudentAdded(): DONE");
-        } catch(ex) {
-            this.loggingService.error(ex);
+    public onStudentAdded(event: {newStudent: Student}): void {
+        let isSuccessful: boolean = this.classService.addNewStudent(event.newStudent);
+        if (isSuccessful) {
+            this.students = this.classService.getAllStudents();
         }
-        return isDone;
     }
 
     /**
      * Remove a student from Student List
      * @param selectedStudentId 
      */
-    public onStudentRemoved(selectedStudentId: number): boolean {
-        this.loggingService.info("ClassComponent.onStudentRemoved(): processing");
-        let isDone: boolean = false;
-        try {
-            if (this.students && this.students.length > 0) {
-                console.log(`Deleting Student: ${selectedStudentId}`);
-                let index: number = -1;
-                this.students.forEach(student => {
-                    index++;
-                    if (student.getId() == selectedStudentId) {
-                        this.students.splice(index, 1);
-                        isDone = true;
-                    }
-                });
-            }
-            this.loggingService.info("ClassComponent.onStudentRemoved(): DONE");
-        } catch(ex) {
-            this.loggingService.error(ex);
+    public onStudentRemoved(selectedStudentId: number): void {
+        let isSuccessful: boolean = this.classService.removeStudent(selectedStudentId);
+        if (isSuccessful) {
+            this.students = this.classService.getAllStudents();
         }
-        return isDone;
     }
 }
