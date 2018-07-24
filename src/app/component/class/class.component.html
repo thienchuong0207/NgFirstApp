@@ -1,6 +1,8 @@
+<h1 style="text-align: left; margin-left: 1%">GVCN: Thầy Hòa</h1>
+<hr/>
 <app-student-form (onStudentCreatedEventEmitter)="onStudentAdded($event)"></app-student-form>
 <hr/>
-<table class="table table-condensed table-hover" style="width: 50%; margin-left: 1%">
+<table class="table table-condensed table-hover" style="width: 70%; margin-left: 1%">
     <thead>
         <tr style="color: white; background-color: darkslateblue">
             <th scope="col" style="width: 10%; text-align: center">Mã số</th>
@@ -14,7 +16,7 @@
             <td style="text-align: center; color: darkslateblue">{{student.id}}</td>
             <td style="color: darkslateblue">{{student.name}}</td>
             <td style="color: darkslateblue">{{student.getGender()}}</td>
-            <td><img id="deleteStudent" name="deleteStudent" src="../../assets/img/delete.png" width="16px" height="16px"
+            <td><img id="deleteStudent" name="deleteStudent" src="../../assets/img/icon_delete.png" width="16px" height="16px"
                 (click)="onStudentRemoved(student.id)"/></td>
         </tr>
     </tbody>

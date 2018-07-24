@@ -1,12 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+div {
+    color: darkslateblue;
+}
+
+ul li {
+    color: darkslateblue;
+}
+
+input[type="text"] {
+    color: darkslateblue
+}
+
 input[type="text"]:focus {
-    border-color: darkslateblue
+    border-color: darkslateblue;
 }
 
 input[type="text"]:hover {
-    border-color: darkslateblue
+    border-color: darkslateblue;
 }
 
 select:hover {
-    border-color: darkslateblue
+    border-color: darkslateblue;
+}
+
+button[type="button"] {
+    background-color: darkslateblue;
+}
+
+button[type="button"]:hover {
+    background-color: darkslateblue;
 }

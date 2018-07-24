@@ -1,7 +1,15 @@
-<div>
-    <h1 style="margin-left: 1%; margin-right: 1%; color: darkslateblue; text-align: left">
-        Bàn Cờ - Lớp 9/8
-    </h1>
-    <hr/>
-    <app-class></app-class>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-lg-offset-0">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a routerLink="/">Bàn Cờ</a></li>
+                <li role="presentation"><a [routerLink]="['/class']">Lớp 9/8</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-lg-offset-0">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 </div>
