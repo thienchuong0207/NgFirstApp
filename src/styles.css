@@ -8,7 +8,7 @@ ul li {
 }
 
 input[type="text"] {
-    color: darkslateblue
+    color: darkslateblue;
 }
 
 input[type="text"]:focus {
@@ -19,14 +19,35 @@ input[type="text"]:hover {
     border-color: darkslateblue;
 }
 
+select:focus {
+    border-color: darkslateblue;
+}
+
 select:hover {
     border-color: darkslateblue;
 }
 
 button[type="button"] {
-    background-color: darkslateblue;
+    background-color: sandybrown;
+    border-color: sandybrown;
 }
 
 button[type="button"]:hover {
-    background-color: darkslateblue;
+    background-color: sandybrown;
+    border-color: sandybrown;
+}
+
+.btn-primary {
+    background-color: sandybrown;
+    border-color: sandybrown;
+}
+
+.btn-primary:focus {
+    background-color: sandybrown;
+    border-color: sandybrown;
+}
+
+.btn-primary:hover {
+    background-color: sandybrown;
+    border-color: sandybrown;
 }
