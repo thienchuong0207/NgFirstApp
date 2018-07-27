@@ -3,33 +3,29 @@
 <app-student-form (onStudentCreatedEventEmitter)="onStudentAdded($event)"></app-student-form>
 <hr/>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
         <table class="table table-condensed table-hover" style="width: 100%; margin-left: 1%">
                 <thead>
                     <tr style="color: white; background-color: darkslateblue">
-                        <th scope="col" style="width: 10%; text-align: center">Mã số</th>
-                        <th scope="col" style="width: 80%">Họ Tên</th>
-                        <th scope="col" style="width: 5%"></th>
-                        <th scope="col" style="width: 5%"></th>
+                        <th scope="col" style="width: 15%; text-align: center">Mã số</th>
+                        <th scope="col" style="width: 50%; text-align: left">Họ Tên</th>
+                        <th scope="col" style="width: 20%; text-align: left">Giới Tính</th>
+                        <th scope="col" style="width: 15%; text-align: center">Ảnh</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let student of students">
-                        <td style="text-align: center; color: darkslateblue">{{student.id}}</td>
-                        <td style="color: darkslateblue">{{student.name}}</td>
-                        <td>
+                        <td style="text-align: center; color: darkslateblue">
                             <img id="deleteStudent" name="deleteStudent" src="../../assets/img/icon_delete.png" width="16px" height="16px"
-                                (click)="onStudentRemoved(student.id)"/>
+                                (click)="onStudentRemoved(student.id)" title="Remove" style="margin-right: 6px"/> {{student.id}}
                         </td>
+                        <td style="color: darkslateblue">{{student.name}}</td>
+                        <td style="color: darkslateblue">{{student.getGender()}}</td>
                         <td>
-                            <img id="studentPhoto" name="studentPhoto" src="../../assets/img/icon_camera.png" width="16px" height="16px"
-                                (click)="onStudentPhotoDisplayed(student.photo)"/>
+                            <img id="showStudentPhoto" name="showStudentPhoto" [src]="student.photoRenderred" width="100%"/>
                         </td>
                     </tr>
                 </tbody>
             </table>
-    </div>
-    <div class="col-md-4">
-        <img id="studentDetailPhoto" [src]="studentDetailPhoto" width="100%"/>
     </div>
 </div>

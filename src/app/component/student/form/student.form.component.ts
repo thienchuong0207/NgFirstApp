@@ -19,9 +19,12 @@ export class StudentFormComponent {
     /* Custom Events */
     @Output() private onStudentCreatedEventEmitter = new EventEmitter<{newStudent: Student}>();
     
+    /* Properties */
+    private studentPhotoPreview;
+
     /* Constructor */
     constructor() {
-        this.studentDTO = new Student(++this.generatedStudentId, '', GenderEnum.FEMALE, '', 0);
+        this.studentDTO = new Student(++this.generatedStudentId, '', GenderEnum.FEMALE, null, 0);
     }
     
     /* Getters and Setters */
@@ -35,6 +38,21 @@ export class StudentFormComponent {
     /* Functions */
     public onStudentCreated(): void {
         this.onStudentCreatedEventEmitter.emit({newStudent: this.studentDTO});
-        this.studentDTO = new Student(++this.generatedStudentId, '', GenderEnum.FEMALE, '', 0);
+        this.studentDTO = new Student(++this.generatedStudentId, '', GenderEnum.FEMALE, null, 0);
+        this.studentPhotoPreview = '';
+    }
+
+    public onStudentPhotoChanged(event): void {
+        try {
+            let fileReader = new FileReader();
+            fileReader.onload = () => {
+                this.studentPhotoPreview = fileReader.result;
+                this.studentDTO.setPhotoRenderred(this.studentPhotoPreview); 
+            };
+            fileReader.readAsDataURL(event.target.files[0]);
+            this.studentDTO.setPhoto(event.target.files[0]);
+        } catch(exception) {
+            this.studentPhotoPreview = '';
+        }
     }
 }

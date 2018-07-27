@@ -17,6 +17,8 @@ export class ClassComponent {
     private id: number = 1;
     private name: string = "9/8";
     private students: Student[] = [];
+
+    /* Display photo of selected student */
     private studentDetailPhoto: string = '';
 
     /* Dependencies */
@@ -48,14 +50,6 @@ export class ClassComponent {
         let isSuccessful: boolean = this.classService.removeStudent(selectedStudentId);
         if (isSuccessful) {
             this.students = this.classService.getAllStudents();
-            this.studentDetailPhoto = '';
-        }
-    }
-
-    public onStudentPhotoDisplayed(studentPhoto: string): void {
-        if (this.studentDetailPhoto === '') {
-            this.studentDetailPhoto = studentPhoto;
-        } else {
             this.studentDetailPhoto = '';
         }
     }
