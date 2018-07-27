@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './component/home/home.component';
 import { ClassComponent } from './component/class/class.component';
 import { StudentFormComponent } from './component/student/form/student.form.component';
+import { StudentDetailComponent } from './component/student/detail/student.detail.component'; 
 import { ClassService } from './service/ClassService';
 import { LoggingService } from './service/LoggingService';
 
@@ -20,7 +21,8 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     ClassComponent,
-    StudentFormComponent
+    StudentFormComponent,
+    StudentDetailComponent
   ],
   imports: [
     BrowserModule,

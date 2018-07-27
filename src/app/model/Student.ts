@@ -5,12 +5,14 @@ export class Student {
     private id: number;
     private name: string;
     private gender: GenderEnum;
+    private photo: string;
     private classId: number;
     /* Constructor */
-    public constructor(id: number, name: string, gender: GenderEnum, classId: number) {
+    public constructor(id: number, name: string, gender: GenderEnum, photo: string, classId: number) {
         this.id = id;
         this.name = name;
         this.gender = gender;
+        this.photo = photo;
         this.classId = classId;
     }
     /* Getters and Setters */
@@ -31,6 +33,12 @@ export class Student {
     }
     public setGender(gender: GenderEnum): void {
         this.gender = gender;
+    }
+    public getPhoto(): string {
+        return this.photo;
+    }
+    public setPhoto(photo: string): void {
+        this.photo = photo;
     }
     public getClassId(): number {
         return this.classId;

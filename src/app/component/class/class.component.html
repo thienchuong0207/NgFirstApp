@@ -2,22 +2,34 @@
 <hr/>
 <app-student-form (onStudentCreatedEventEmitter)="onStudentAdded($event)"></app-student-form>
 <hr/>
-<table class="table table-condensed table-hover" style="width: 70%; margin-left: 1%">
-    <thead>
-        <tr style="color: white; background-color: darkslateblue">
-            <th scope="col" style="width: 10%; text-align: center">Mã số</th>
-            <th scope="col" style="width: 70%">Họ Tên</th>
-            <th scope="col" style="width: 15%">Giới Tính</th>
-            <th scope="col" style="width: 5%"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let student of students">
-            <td style="text-align: center; color: darkslateblue">{{student.id}}</td>
-            <td style="color: darkslateblue">{{student.name}}</td>
-            <td style="color: darkslateblue">{{student.getGender()}}</td>
-            <td><img id="deleteStudent" name="deleteStudent" src="../../assets/img/icon_delete.png" width="16px" height="16px"
-                (click)="onStudentRemoved(student.id)"/></td>
-        </tr>
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-md-8">
+        <table class="table table-condensed table-hover" style="width: 100%; margin-left: 1%">
+                <thead>
+                    <tr style="color: white; background-color: darkslateblue">
+                        <th scope="col" style="width: 10%; text-align: center">Mã số</th>
+                        <th scope="col" style="width: 80%">Họ Tên</th>
+                        <th scope="col" style="width: 5%"></th>
+                        <th scope="col" style="width: 5%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let student of students">
+                        <td style="text-align: center; color: darkslateblue">{{student.id}}</td>
+                        <td style="color: darkslateblue">{{student.name}}</td>
+                        <td>
+                            <img id="deleteStudent" name="deleteStudent" src="../../assets/img/icon_delete.png" width="16px" height="16px"
+                                (click)="onStudentRemoved(student.id)"/>
+                        </td>
+                        <td>
+                            <img id="studentPhoto" name="studentPhoto" src="../../assets/img/icon_camera.png" width="16px" height="16px"
+                                (click)="onStudentPhotoDisplayed(student.photo)"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+    <div class="col-md-4">
+        <img id="studentDetailPhoto" [src]="studentDetailPhoto" width="100%"/>
+    </div>
+</div>

@@ -8,6 +8,10 @@
         <input type="text" id="studentName" name="studentName" class="form-control" style="width: 30%;" [(ngModel)]="studentDTO.name"/>
     </div>
     <div class="form-group">
+        <label>Ảnh</label>
+        <input type="text" id="studentPhoto" name="studentPhoto" class="form-control" style="width: 30%" [(ngModel)]="studentDTO.photo"/>
+    </div>
+    <div class="form-group">
         <label>Giới Tính</label>
         <select class="form-control" style="width: 8%;" name="studentGender" [(ngModel)]="studentDTO.gender">
             <option value="0">Nữ</option>

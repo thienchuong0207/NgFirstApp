@@ -51,3 +51,16 @@ button[type="button"]:hover {
     background-color: sandybrown;
     border-color: sandybrown;
 }
+
+#homeTab {
+    color: white;
+    background-color: darkslateblue;
+    font-weight: bold;
+}
+
+#classTab {
+    color: white;
+    background-color: sandybrown;
+    font-weight: bold;
+}
+

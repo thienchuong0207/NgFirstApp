@@ -21,7 +21,7 @@ export class StudentFormComponent {
     
     /* Constructor */
     constructor() {
-        this.studentDTO = new Student(++this.generatedStudentId, '', GenderEnum.FEMALE, 0);
+        this.studentDTO = new Student(++this.generatedStudentId, '', GenderEnum.FEMALE, '', 0);
     }
     
     /* Getters and Setters */
@@ -35,6 +35,6 @@ export class StudentFormComponent {
     /* Functions */
     public onStudentCreated(): void {
         this.onStudentCreatedEventEmitter.emit({newStudent: this.studentDTO});
-        this.studentDTO = new Student(++this.generatedStudentId, '', GenderEnum.FEMALE, 0);
+        this.studentDTO = new Student(++this.generatedStudentId, '', GenderEnum.FEMALE, '', 0);
     }
 }
