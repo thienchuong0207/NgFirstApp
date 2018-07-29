@@ -1,31 +1,32 @@
 <h1 style="text-align: left; margin-left: 1%">GVCN: Thầy Hòa</h1>
 <hr/>
-<app-student-form (onStudentCreatedEventEmitter)="onStudentAdded($event)"></app-student-form>
-<hr/>
 <div class="row">
     <div class="col-md-6">
-        <table class="table table-condensed table-hover" style="width: 100%; margin-left: 1%">
-                <thead>
-                    <tr style="color: white; background-color: darkslateblue">
-                        <th scope="col" style="width: 15%; text-align: center">Mã số</th>
-                        <th scope="col" style="width: 50%; text-align: left">Họ Tên</th>
-                        <th scope="col" style="width: 20%; text-align: left">Giới Tính</th>
-                        <th scope="col" style="width: 15%; text-align: center">Ảnh</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let student of students">
-                        <td style="text-align: center; color: darkslateblue">
-                            <img id="deleteStudent" name="deleteStudent" src="../../assets/img/icon_delete.png" width="16px" height="16px"
-                                (click)="onStudentRemoved(student.id)" title="Remove" style="margin-right: 6px"/> {{student.id}}
-                        </td>
-                        <td style="color: darkslateblue">{{student.name}}</td>
-                        <td style="color: darkslateblue">{{student.getGender()}}</td>
-                        <td>
-                            <img id="showStudentPhoto" name="showStudentPhoto" [src]="student.photoRenderred" width="100%"/>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <app-student-form (onStudentCreatedEventEmitter)="onStudentAdded($event)"></app-student-form>
+    </div>
+    <div class="col-md-6">
+        <table class="table table-striped" style="width: 100%; margin-left: 1%; margin-top: 5%">
+            <thead>
+                <tr style="color: white; background-color: darkslateblue">
+                    <th scope="col" style="width: 15%; text-align: center">Mã số</th>
+                    <th scope="col" style="width: 50%; text-align: left">Họ Tên</th>
+                    <th scope="col" style="width: 20%; text-align: left">Giới Tính</th>
+                    <th scope="col" style="width: 15%; text-align: center">Ảnh</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let student of students">
+                    <td style="text-align: center; color: darkslateblue">
+                        <img id="deleteStudent" name="deleteStudent" src="../../assets/img/icon_delete.png" width="16px" height="16px"
+                            (click)="onStudentRemoved(student.id)" title="Remove" style="margin-right: 6px"/> {{student.id}}
+                    </td>
+                    <td style="color: darkslateblue">{{student.name}}</td>
+                    <td style="color: darkslateblue">{{student.getGender()}}</td>
+                    <td>
+                        <img id="showStudentPhoto" name="showStudentPhoto" [src]="student.photoRenderred" width="100%"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
