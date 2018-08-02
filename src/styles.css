@@ -28,28 +28,28 @@ select:hover {
 }
 
 button[type="button"] {
-    background-color: sandybrown;
-    border-color: sandybrown;
+    background-color: cornflowerblue;
+    border-color: cornflowerblue;
 }
 
 button[type="button"]:hover {
-    background-color: sandybrown;
-    border-color: sandybrown;
+    background-color: cornflowerblue;
+    border-color: cornflowerblue;
 }
 
 .btn-primary {
-    background-color: sandybrown;
-    border-color: sandybrown;
+    background-color: cornflowerblue;
+    border-color: cornflowerblue;
 }
 
 .btn-primary:focus {
-    background-color: sandybrown;
-    border-color: sandybrown;
+    background-color: cornflowerblue;
+    border-color: cornflowerblue;
 }
 
 .btn-primary:hover {
-    background-color: sandybrown;
-    border-color: sandybrown;
+    background-color: cornflowerblue;
+    border-color: cornflowerblue;
 }
 
 #homeTab {
