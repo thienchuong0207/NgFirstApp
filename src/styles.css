@@ -64,3 +64,11 @@ button[type="button"]:hover {
     font-weight: bold;
 }
 
+#divStudentPhotoPreview {
+    border-width: thin;
+    border-style: solid;
+    border-color: lightgrey;
+    width: 150px;
+    height: 150px;
+    margin-left: 0px;
+}

@@ -21,6 +21,7 @@ export class StudentFormComponent {
     
     /* Properties */
     private studentPhotoPreview;
+    private studentPhotoPreviewDisplayed: boolean = false;
 
     /* Constructor */
     constructor() {
@@ -44,15 +45,22 @@ export class StudentFormComponent {
 
     public onStudentPhotoChanged(event): void {
         try {
-            let fileReader = new FileReader();
-            fileReader.onload = () => {
-                this.studentPhotoPreview = fileReader.result;
-                this.studentDTO.setPhotoRenderred(this.studentPhotoPreview); 
-            };
-            fileReader.readAsDataURL(event.target.files[0]);
-            this.studentDTO.setPhoto(event.target.files[0]);
+            let studentPhoto = event.target.files[0];
+            if (studentPhoto != null) {
+                let fileReader = new FileReader();
+                fileReader.onload = () => {
+                    this.studentPhotoPreview = fileReader.result;
+                    this.studentDTO.setPhotoRenderred(this.studentPhotoPreview); 
+                };
+                fileReader.readAsDataURL(studentPhoto);
+                this.studentDTO.setPhoto(studentPhoto);
+                this.studentPhotoPreviewDisplayed = true;
+            } else {
+                this.studentPhotoPreviewDisplayed = false;
+            }
         } catch(exception) {
             this.studentPhotoPreview = '';
+            this.studentPhotoPreviewDisplayed = false;
         }
     }
 }

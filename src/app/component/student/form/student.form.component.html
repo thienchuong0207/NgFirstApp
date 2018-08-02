@@ -14,8 +14,11 @@
             onclick="document.getElementById('studentPhoto').click()"
             onmouseout="document.getElementById('imgCameraOff').style = 'display:inline'; document.getElementById('imgCameraOn').style = 'display:none';"
             style="display:none;"/>
+        <label style="padding-left: 5px">Ảnh</label>
         <p></p>
-        <img id="studentPhotoPreview" name="studentPhotoPreview" class="studentPhotoPreview" [src]="studentPhotoPreview" width="auto" height="200px"/>
+        <div id="divStudentPhotoPreview" class="container">
+            <img id="imgStudentPhotoPreview" name="studentPhotoPreview" class="img-responsive" *ngIf="studentPhotoPreviewDisplayed" [src]="studentPhotoPreview"/>
+        </div>
         <input type="file" id="studentPhoto" name="studentPhoto" style="width:70%" (change)="onStudentPhotoChanged($event)" style="display:none;"/>
     </div>
     <div class="form-group">
