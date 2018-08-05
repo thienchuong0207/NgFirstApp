@@ -67,8 +67,13 @@ button[type="button"]:hover {
 #divStudentPhotoPreview {
     border-width: thin;
     border-style: solid;
-    border-color: lightgrey;
+    border-color: darkslateblue;
     width: 150px;
     height: 150px;
     margin-left: 0px;
+}
+
+#imgStudentPhotoPreview {
+    width: 30%;
+    height: auto
 }

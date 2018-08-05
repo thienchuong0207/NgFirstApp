@@ -38,9 +38,15 @@ export class StudentFormComponent {
     
     /* Functions */
     public onStudentCreated(): void {
-        this.onStudentCreatedEventEmitter.emit({newStudent: this.studentDTO});
-        this.studentDTO = new Student(++this.generatedStudentId, '', GenderEnum.FEMALE, null, 0);
-        this.studentPhotoPreview = '';
+        try {
+            this.onStudentCreatedEventEmitter.emit({newStudent: this.studentDTO});
+            this.studentDTO = new Student(++this.generatedStudentId, '', GenderEnum.FEMALE, null, 0);
+        } catch(exception) {
+            console.log(exception);
+        } finally {
+            this.studentPhotoPreview = '';
+            this.studentPhotoPreviewDisplayed = false;
+        }
     }
 
     public onStudentPhotoChanged(event): void {
