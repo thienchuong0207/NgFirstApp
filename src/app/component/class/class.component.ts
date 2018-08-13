@@ -46,8 +46,9 @@ export class ClassComponent {
      * Remove a student from Student List
      * @param selectedStudentId 
      */
-    public onStudentRemoved(selectedStudentId: number): void {
-        let isSuccessful: boolean = this.classService.removeStudent(selectedStudentId);
+    public onStudentRemoved(event: {removedStudentId: number}): void {
+        console.log('def');
+        let isSuccessful: boolean = this.classService.removeStudent(event.removedStudentId);
         if (isSuccessful) {
             this.students = this.classService.getAllStudents();
             this.studentDetailPhoto = '';

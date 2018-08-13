@@ -17,7 +17,8 @@ export class StudentFormComponent {
     private generatedStudentId: number = 0;
     
     /* Custom Events */
-    @Output() private onStudentCreatedEventEmitter = new EventEmitter<{newStudent: Student}>();
+    @Output()
+    private onStudentCreatedEventEmitter: EventEmitter<{newStudent: Student}> = new EventEmitter<{newStudent: Student}>();
     
     /* Properties */
     private studentPhotoPreview;
