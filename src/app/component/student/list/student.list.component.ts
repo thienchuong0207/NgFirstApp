@@ -1,10 +1,11 @@
-import { Component, Input, Output, EventEmitter} from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { Student } from '../../../model/Student';
 
 @Component({
     selector: 'app-student-list',
     templateUrl: './student.list.component.html',
-    styleUrls: ['./student.list.component.css']
+    styleUrls: ['./student.list.component.css'],
+    encapsulation: ViewEncapsulation.Emulated
 })
 export class StudentListComponent {
 

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { Student } from '../../../model/Student';
 import { GenderEnum } from '../../../util/GenderEnum';
+import { LoggingService } from '../../../service/LoggingService';
 
 @Component({
     selector: 'app-student-form',
@@ -23,9 +24,10 @@ export class StudentFormComponent {
     /* Properties */
     private studentPhotoPreview;
     private studentPhotoPreviewDisplayed: boolean = false;
+    private studentPhotoTempUploadPath: string = '';
 
     /* Constructor */
-    constructor() {
+    constructor(private loggingService: LoggingService) {
         this.studentDTO = new Student(++this.generatedStudentId, '', GenderEnum.FEMALE, null, 0);
     }
     
@@ -43,7 +45,7 @@ export class StudentFormComponent {
             this.onStudentCreatedEventEmitter.emit({newStudent: this.studentDTO});
             this.studentDTO = new Student(++this.generatedStudentId, '', GenderEnum.FEMALE, null, 0);
         } catch(exception) {
-            console.log(exception);
+            this.loggingService.error(exception);
         } finally {
             this.studentPhotoPreview = '';
             this.studentPhotoPreviewDisplayed = false;
@@ -68,6 +70,9 @@ export class StudentFormComponent {
         } catch(exception) {
             this.studentPhotoPreview = '';
             this.studentPhotoPreviewDisplayed = false;
+            this.loggingService.error(exception);
+        } finally {
+            this.studentPhotoTempUploadPath = '';
         }
     }
 }

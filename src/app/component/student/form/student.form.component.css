@@ -1,0 +1,33 @@
+input[type="text"] {
+    width: 70%;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+img {
+    width: 32px;
+}
+
+#imgCameraOn {
+    display: none;
+}
+
+#divStudentPhotoPreview {
+    border-width: thin;
+    border-style: solid;
+    border-color: darkslateblue;
+    width: 150px;
+    height: 150px;
+    margin-left: 0px;
+}
+
+#imgStudentPhotoPreview {
+    width: 30%;
+    height: auto
+}
+
+#selectGender {
+    width: 20%;
+}

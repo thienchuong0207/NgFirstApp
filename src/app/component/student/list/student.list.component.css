@@ -1,0 +1,48 @@
+table {
+    width:100%;
+    margin-left:1%;
+    margin-top:5%;
+}
+
+table thead tr {
+    color:white;
+    background-color:darkslateblue;
+}
+
+#studentId {
+    width:15%;
+    text-align:center;
+}
+
+#studentName {
+    width:50%;
+    text-align:left;
+}
+
+#studentGender {
+    width:20%;
+    text-align:left;
+}
+
+#studentPhoto {
+    width:15%;
+    text-align:center;
+}
+
+#studentIdContent {
+    text-align:center;
+    color:darkslateblue;
+}
+
+#studentNameContent {
+    color:darkslateblue;
+}
+
+#studentGenderContent {
+    color:darkslateblue;
+}
+
+#showStudentPhoto {
+    width: 100%;
+    height: auto;
+}

@@ -63,17 +63,3 @@ button[type="button"]:hover {
     background-color: sandybrown;
     font-weight: bold;
 }
-
-#divStudentPhotoPreview {
-    border-width: thin;
-    border-style: solid;
-    border-color: darkslateblue;
-    width: 150px;
-    height: 150px;
-    margin-left: 0px;
-}
-
-#imgStudentPhotoPreview {
-    width: 30%;
-    height: auto
-}

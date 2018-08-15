@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 import { Student as Student } from '../../model/Student';
-import { GenderEnum as GenderEnum } from '../../util/GenderEnum';
 import { ClassService } from '../../service/ClassService';
 
 @Component({
@@ -30,12 +29,12 @@ export class ClassComponent {
     }
 
     /* Functions */
-    
+
     /**
      * Add new student to Student List
      * @param event
      */
-    public onStudentAdded(event: {newStudent: Student}): void {
+    public onStudentAdded(event: { newStudent: Student }): void {
         let isSuccessful: boolean = this.classService.addNewStudent(event.newStudent);
         if (isSuccessful) {
             this.students = this.classService.getAllStudents();
@@ -46,8 +45,7 @@ export class ClassComponent {
      * Remove a student from Student List
      * @param selectedStudentId 
      */
-    public onStudentRemoved(event: {removedStudentId: number}): void {
-        console.log('def');
+    public onStudentRemoved(event: { removedStudentId: number }): void {
         let isSuccessful: boolean = this.classService.removeStudent(event.removedStudentId);
         if (isSuccessful) {
             this.students = this.classService.getAllStudents();
