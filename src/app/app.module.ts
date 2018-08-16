@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './component/home/home.component';
 import { ClassComponent } from './component/class/class.component';
 import { StudentFormComponent } from './component/student/form/student.form.component';
-import { StudentListComponent} from './component/student/list/student.list.component';
+import { StudentListComponent } from './component/student/list/student.list.component';
 import { ClassService } from './service/ClassService';
 import { LoggingService } from './service/LoggingService';
 
@@ -29,7 +29,7 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [ ClassService, LoggingService],
+  providers: [ClassService, LoggingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

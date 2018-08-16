@@ -1,3 +1,7 @@
+#divStudentForm {
+    width: 100%;
+}
+
 input[type="text"] {
     width: 70%;
 }
@@ -17,7 +21,7 @@ img {
 #divStudentPhotoPreview {
     border-width: thin;
     border-style: solid;
-    border-color: darkslateblue;
+    border-color: lightgrey;
     width: 150px;
     height: 150px;
     margin-left: 0px;

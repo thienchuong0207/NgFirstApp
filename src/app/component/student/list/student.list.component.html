@@ -1,24 +1,30 @@
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col" id="studentId">Mã số</th>
-            <th scope="col" id="studentName">Họ Tên</th>
-            <th scope="col" id="studentGender">Giới Tính</th>
-            <th scope="col" id="studentPhoto">Ảnh</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let student of students">
-            <td id="studentIdContent">
-                <img id="imgDeleteStudent" name="deleteStudent" src="../../assets/img/icon_delete.png" width="16px" height="16px"
-                    (click)="onStudentRemoved(student.id)" title="Xóa" style="margin-right:6px;"/>
-                    {{student.id}}
-            </td>
-            <td id="studentNameContent">{{student.name}}</td>
-            <td id="studentGenderContent">{{student.getGender()}}</td>
-            <td>
-                <img id="showStudentPhoto" name="showStudentPhoto" [src]="student.photoRenderred"/>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div id="divStudentList">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col" id="studentId">Mã số</th>
+                <th scope="col" id="studentName">Họ Tên</th>
+                <th scope="col" id="studentGender">Giới Tính</th>
+                <th scope="col" id="studentPhoto">Ảnh</th>
+                <th scope="col" id="studentViewDetail"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of students">
+                <td id="studentIdContent">
+                    <img id="imgDeleteStudent" name="deleteStudent" src="../../../../assets/img/icon_delete.png"
+                        (click)="onStudentRemoved(student.id)" title="Xóa"/>
+                        {{student.id}}
+                </td>
+                <td id="studentNameContent">{{student.name}}</td>
+                <td id="studentGenderContent">{{student.getGender()}}</td>
+                <td id="studentShowPhotoContext">
+                    <img id="imgShowStudentPhoto" name="showStudentPhoto" [src]="student.photoRenderred"/>
+                </td>
+                <td id="studentViewDetailContent">
+                    <img id="imgStudentViewDetail" src="../../../../assets/img/icon_view_detail.png" title="Xem Chi Tiết"/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

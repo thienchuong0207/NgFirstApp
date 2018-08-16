@@ -1,33 +1,35 @@
-<form id="frmStudentForm">
-    <div class="form-group">
-        <label>Mã số</label>
-        <input type="text" id="studentId" name="studentId" class="form-control" [(ngModel)]="studentDTO.id" readonly/>
-    </div>
-    <div class="form-group">
-        <label>Họ Tên</label>
-        <input type="text" id="studentName" name="studentName" class="form-control" [(ngModel)]="studentDTO.name"/>
-    </div>
-    <div class="form-group">
-        <!-- Camera Icon -->
-        <img id="imgCameraOff"src="../../../../assets/img/icon_camera_off.jpg" title="Chọn Ảnh"
-            onmouseover="document.getElementById('imgCameraOff').style = 'display:none;'; document.getElementById('imgCameraOn').style = 'display:inline;'"/>
-        <img id="imgCameraOn"src="../../../../assets/img/icon_camera_on.png" title="Chọn Ảnh"
-            onclick="document.getElementById('studentPhoto').click()"
-            onmouseout="document.getElementById('imgCameraOff').style = 'display:inline'; document.getElementById('imgCameraOn').style = 'display:none';"/>
-        <!-- Label -->
-            <label style="padding-left: 5px">Ảnh</label>
-        <p></p>
-        <!-- Photo Preview -->
-        <div id="divStudentPhotoPreview" class="container" *ngIf="!studentPhotoPreviewDisplayed"></div>
-        <img id="imgStudentPhotoPreview" name="studentPhotoPreview" class="img-rounded" *ngIf="studentPhotoPreviewDisplayed" [src]="studentPhotoPreview"/>
-        <input type="file" id="studentPhoto" name="studentPhoto" [(ngModel)]="studentPhotoTempUploadPath" (change)="onStudentPhotoChanged($event);"/>
-    </div>
-    <div class="form-group">
-        <label>Giới Tính</label>
-        <select id="selectGender" class="form-control" name="studentGender" [(ngModel)]="studentDTO.gender">
-            <option value="0">Nữ</option>
-            <option value="1">Nam</option>
-        </select>
-    </div>
-    <button type="button" class="btn btn-primary" (click)="onStudentCreated()">Thêm Học Sinh</button>
-</form>
+<div id="divStudentForm">
+    <form id="frmStudentForm">
+        <div class="form-group">
+            <label>Mã số</label>
+            <input type="text" id="studentId" name="studentId" class="form-control" [(ngModel)]="studentDTO.id" readonly/>
+        </div>
+        <div class="form-group">
+            <label>Họ Tên</label>
+            <input type="text" id="studentName" name="studentName" class="form-control" [(ngModel)]="studentDTO.name"/>
+        </div>
+        <div class="form-group">
+            <!-- Camera Icon -->
+            <img id="imgCameraOff"src="../../../../assets/img/icon_camera_off.jpg" title="Chọn Ảnh"
+                onmouseover="document.getElementById('imgCameraOff').style = 'display:none;'; document.getElementById('imgCameraOn').style = 'display:inline;'"/>
+            <img id="imgCameraOn"src="../../../../assets/img/icon_camera_on.png" title="Chọn Ảnh"
+                onclick="document.getElementById('studentPhoto').click()"
+                onmouseout="document.getElementById('imgCameraOff').style = 'display:inline'; document.getElementById('imgCameraOn').style = 'display:none';"/>
+            <!-- Label -->
+                <label style="padding-left: 5px">Ảnh</label>
+            <p></p>
+            <!-- Photo Preview -->
+            <div id="divStudentPhotoPreview" class="container" *ngIf="!studentPhotoPreviewDisplayed"></div>
+            <img id="imgStudentPhotoPreview" name="studentPhotoPreview" class="img-rounded" *ngIf="studentPhotoPreviewDisplayed" [src]="studentPhotoPreview"/>
+            <input type="file" id="studentPhoto" name="studentPhoto" [(ngModel)]="studentPhotoTempUploadPath" (change)="onStudentPhotoChanged($event);"/>
+        </div>
+        <div class="form-group">
+            <label>Giới Tính</label>
+            <select id="selectGender" class="form-control" name="studentGender" [(ngModel)]="studentDTO.gender">
+                <option value="0">Nữ</option>
+                <option value="1">Nam</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="onStudentCreated()">Thêm Học Sinh</button>
+    </form>
+</div>
