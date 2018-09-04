@@ -14,10 +14,13 @@ export class StudentListComponent {
     private students: Student[] = [];
     
     @Output()
-    private onStudentRemovedEventEmitter: EventEmitter<{removedStudentId: number}> = new EventEmitter<{removedStudentId: number}>();
+    private onStudentRemovedEventEmitter: EventEmitter<{removedStudentId: string}> = new EventEmitter<{removedStudentId: string}>();
 
-    /* Function - Remove a student */
-    public onStudentRemoved(studentId: number): void {
+    /**
+     * Remove a Student
+     * @param studentId
+     */
+    public onStudentRemoved(studentId: string): void {
         let data = {
             removedStudentId: studentId
         };

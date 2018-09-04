@@ -14,9 +14,9 @@ import { LoggingService } from '../../service/LoggingService';
 export class ClassComponent {
 
     /* Properties */
-    private id: number = 1;
-    private name: string = "9/8";
-    private teacherName: string = "";
+    private id: string = 'C01';
+    private name: string = '';
+    private teacherName: string = '';
     private students: Student[] = [];
 
     /* Display photo of selected student */
@@ -31,13 +31,10 @@ export class ClassComponent {
         this.classService = classService;
         this.loggingService = loggingService;
         if (classService) {
-            this.classService.getClassById("C01").subscribe(
-                (response) => {
-                    let responseStatus = response.status;
-                    if (responseStatus == 200) {
-                        let data = response.json();
-                        this.teacherName = data.teacherName;
-                    }
+            this.classService.getClassById(this.id).subscribe(
+                (data: {id: string, name: string, teacherName: string}) => {
+                    this.name = data.name;
+                    this.teacherName = data.teacherName;
                 },
                 (error) => {
                     loggingService.error(error);
@@ -45,8 +42,6 @@ export class ClassComponent {
             );
         }
     }
-
-    /* Functions */
 
     /**
      * Add new student to Student List
@@ -63,7 +58,7 @@ export class ClassComponent {
      * Remove a student from Student List
      * @param selectedStudentId 
      */
-    public onStudentRemoved(event: { removedStudentId: number }): void {
+    public onStudentRemoved(event: { removedStudentId: string }): void {
         let isSuccessful: boolean = this.classService.removeStudent(event.removedStudentId);
         if (isSuccessful) {
             this.students = this.classService.getAllStudents();

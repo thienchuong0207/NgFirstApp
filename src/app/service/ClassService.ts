@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 
 import { Student } from '../model/Student';
 import { LoggingService } from './LoggingService';
+
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { environment as env } from '../../environments/environment';
 
@@ -25,9 +27,15 @@ export class ClassService {
      * Get Class by Id
      * @param classId
      */
-    public getClassById(classId: string): Observable<Response> {
+    public getClassById(classId: string): Observable<{id: string, name: string, teacherName: string}> {
         let apiGettingClassById = `${env.backEndApi.url}/class/${classId}`;
-        return this.http.get(apiGettingClassById);
+        let headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+        return this.http.get(apiGettingClassById, {headers: headers}).pipe(map((response: Response) => {
+            let data = response.json();
+            return data;
+        }));
     }
 
     /**
@@ -51,7 +59,7 @@ export class ClassService {
      * Remove a student from Student List
      * @param selectedStudentId 
      */
-    public removeStudent(selectedStudentId: number): boolean {
+    public removeStudent(selectedStudentId: string): boolean {
         this.loggingService.info(`ClassService.onStudentRemoved(): deleting student ${selectedStudentId} `);
         let isDone: boolean = false;
         try {
@@ -59,7 +67,7 @@ export class ClassService {
                 let index: number = -1;
                 this.students.forEach(student => {
                     index++;
-                    if (student.getId() == selectedStudentId) {
+                    if (student.getId() === selectedStudentId) {
                         this.students.splice(index, 1);
                         isDone = true;
                     }

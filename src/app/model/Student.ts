@@ -3,15 +3,15 @@ import { GenderEnum } from '../util/GenderEnum';
 export class Student {
     
     /* Properties */
-    private id: number;
+    private id: string;
     private name: string;
     private gender: GenderEnum;
     private photo: File;
-    private classId: number;
+    private classId: string;
     private photoRenderred: string;
     
     /* Constructor */
-    public constructor(id: number, name: string, gender: GenderEnum, photo: File, classId: number) {
+    public constructor(id: string, name: string, gender: GenderEnum, photo: File, classId: string) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -20,11 +20,11 @@ export class Student {
     }
     
     /* Getters and Setters */
-    public getId(): number {
+    public getId(): string {
         return this.id;
     }
 
-    public setId(id: number): void {
+    public setId(id: string): void {
         this.id = id;
     }
 
@@ -52,11 +52,11 @@ export class Student {
         this.photo = photo;
     }
 
-    public getClassId(): number {
+    public getClassId(): string {
         return this.classId;
     }
 
-    public setClassId(classId: number): void {
+    public setClassId(classId: string): void {
         this.classId = classId;
     }
 

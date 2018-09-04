@@ -14,9 +14,6 @@ export class StudentFormComponent {
     /* DTO */
     private studentDTO : Student;
     
-    /* Sequence-generated Values  */
-    private generatedStudentId: number = 0;
-    
     /* Custom Events */
     @Output()
     private onStudentCreatedEventEmitter: EventEmitter<{newStudent: Student}> = new EventEmitter<{newStudent: Student}>();
@@ -28,7 +25,7 @@ export class StudentFormComponent {
 
     /* Constructor */
     constructor(private loggingService: LoggingService) {
-        this.studentDTO = new Student(++this.generatedStudentId, '', GenderEnum.FEMALE, null, 0);
+        this.studentDTO = new Student('', '', GenderEnum.FEMALE, null, '');
     }
     
     /* Getters and Setters */
@@ -39,11 +36,13 @@ export class StudentFormComponent {
         return this.studentDTO;
     }
     
-    /* Functions */
+    /**
+     * Create a new Student
+     */
     public onStudentCreated(): void {
         try {
             this.onStudentCreatedEventEmitter.emit({newStudent: this.studentDTO});
-            this.studentDTO = new Student(++this.generatedStudentId, '', GenderEnum.FEMALE, null, 0);
+            this.studentDTO = new Student('', '', GenderEnum.FEMALE, null, '');
         } catch(exception) {
             this.loggingService.error(exception);
         } finally {
@@ -52,6 +51,9 @@ export class StudentFormComponent {
         }
     }
 
+    /**
+     * Preview Student's Photo
+     */
     public onStudentPhotoChanged(event): void {
         try {
             let studentPhoto = event.target.files[0];
