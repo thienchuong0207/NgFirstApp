@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 
 import { Student as Student } from '../../model/Student';
 import { ClassService } from '../../service/ClassService';
+import { LoggingService } from '../../service/LoggingService';
 
 @Component({
     selector: 'app-class',
@@ -15,6 +16,7 @@ export class ClassComponent {
     /* Properties */
     private id: number = 1;
     private name: string = "9/8";
+    private teacherName: string = "";
     private students: Student[] = [];
 
     /* Display photo of selected student */
@@ -22,10 +24,26 @@ export class ClassComponent {
 
     /* Dependencies */
     private classService: ClassService;
+    private loggingService: LoggingService;
 
     /* Constructor */
-    constructor(classService: ClassService) {
+    constructor(classService: ClassService, loggingService: LoggingService) {
         this.classService = classService;
+        this.loggingService = loggingService;
+        if (classService) {
+            this.classService.getClassById("C01").subscribe(
+                (response) => {
+                    let responseStatus = response.status;
+                    if (responseStatus == 200) {
+                        let data = response.json();
+                        this.teacherName = data.teacherName;
+                    }
+                },
+                (error) => {
+                    loggingService.error(error);
+                }
+            );
+        }
     }
 
     /* Functions */

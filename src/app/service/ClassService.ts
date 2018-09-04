@@ -1,19 +1,35 @@
 import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
 
 import { Student } from '../model/Student';
 import { LoggingService } from './LoggingService';
+import { Observable } from 'rxjs';
+
+import { environment as env } from '../../environments/environment';
 
 @Injectable()
 export class ClassService {
+    
     /* Properties */
     private students: Student[] = [];
+    
     /* Constructor */
-    constructor(private loggingService: LoggingService) {}
+    constructor(private http: Http, private loggingService: LoggingService) {}
+    
     /* Getters */
     public getAllStudents(): Student[] {
         return this.students;
     }
-    /* Functions */
+    
+    /**
+     * Get Class by Id
+     * @param classId
+     */
+    public getClassById(classId: string): Observable<Response> {
+        let apiGettingClassById = `${env.backEndApi.url}/class/${classId}`;
+        return this.http.get(apiGettingClassById);
+    }
+
     /**
      * Add new student to Student List
      * @param event
