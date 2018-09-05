@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
-
-import { Student } from '../model/Student';
-import { LoggingService } from './LoggingService';
-
+import { Headers, Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
 import { environment as env } from '../../environments/environment';
+import { Student } from '../model/Student';
+import { LoggingService } from './LoggingService';
 
 @Injectable()
 export class ClassService {

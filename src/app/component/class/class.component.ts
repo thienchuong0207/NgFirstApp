@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-
 import { Student as Student } from '../../model/Student';
 import { ClassService } from '../../service/ClassService';
 import { LoggingService } from '../../service/LoggingService';

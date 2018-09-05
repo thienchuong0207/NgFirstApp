@@ -1,12 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule} from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './component/home/home.component';
 import { ClassComponent } from './component/class/class.component';
+import { HomeComponent } from './component/home/home.component';
 import { StudentFormComponent } from './component/student/form/student.form.component';
 import { StudentListComponent } from './component/student/list/student.list.component';
 import { ClassService } from './service/ClassService';

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { Student } from '../../../model/Student';
-import { GenderEnum } from '../../../util/GenderEnum';
 import { LoggingService } from '../../../service/LoggingService';
+import { GenderEnum } from '../../../util/GenderEnum';
 
 @Component({
     selector: 'app-student-form',
@@ -32,6 +32,7 @@ export class StudentFormComponent {
     public setStudentDTO(studentDTO: Student): void {
         this.studentDTO = studentDTO;
     }
+    
     public getStudentDTO() : Student {
         return this.studentDTO;
     }
