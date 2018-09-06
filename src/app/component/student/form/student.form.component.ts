@@ -41,6 +41,7 @@ export class StudentFormComponent {
      * Create a new Student
      */
     public onStudentCreated(): void {
+        
         try {
             this.onStudentCreatedEventEmitter.emit({newStudent: this.studentDTO});
             this.studentDTO = new Student('', '', GenderEnum.FEMALE, null, '');
@@ -56,6 +57,7 @@ export class StudentFormComponent {
      * Preview Student's Photo
      */
     public onStudentPhotoChanged(event): void {
+        
         try {
             let studentPhoto = event.target.files[0];
             if (studentPhoto != null) {

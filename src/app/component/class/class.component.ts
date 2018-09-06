@@ -1,7 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { Response } from '@angular/http';
+import { Observable } from 'rxjs';
 import { Student as Student } from '../../model/Student';
 import { ClassService } from '../../service/ClassService';
 import { LoggingService } from '../../service/LoggingService';
+import { GenderEnum } from '../../util/GenderEnum';
 
 @Component({
     selector: 'app-class',
@@ -27,9 +30,11 @@ export class ClassComponent {
 
     /* Constructor */
     constructor(classService: ClassService, loggingService: LoggingService) {
+        
         this.classService = classService;
         this.loggingService = loggingService;
         if (classService) {
+            /* Get Class Info */
             this.classService.getClassById(this.id).subscribe(
                 (data: {id: string, name: string, teacherName: string}) => {
                     this.name = data.name;
@@ -39,6 +44,23 @@ export class ClassComponent {
                     loggingService.error(error);
                 }
             );
+            /* Get List of Students */
+            this.classService.getStudentsByClassId(this.id).subscribe((returnedStudents: []) => {
+                if (returnedStudents != null && returnedStudents.length > 0) {
+                    returnedStudents.forEach((returnedStudent: {id: string, name: string, gender: number, photo: any, classId: string}) => {
+                        let student: Student = new Student(
+                            returnedStudent.id,
+                            returnedStudent.name,
+                            returnedStudent.gender == 0 ? GenderEnum.FEMALE : GenderEnum.MALE,
+                            null,
+                            returnedStudent.classId  
+                        );
+                        this.students.push(student);
+                    })
+                }
+            }, (error) => {
+                this.loggingService.error(error)
+            });
         }
     }
 
@@ -47,9 +69,16 @@ export class ClassComponent {
      * @param event
      */
     public onStudentAdded(event: { newStudent: Student }): void {
-        let isSuccessful: boolean = this.classService.addNewStudent(event.newStudent);
-        if (isSuccessful) {
-            this.students = this.classService.getAllStudents();
+        
+        event.newStudent.setClassId(this.id);
+        let observable: Observable<Response> = this.classService.addNewStudent(event.newStudent);
+        if (observable != null) {
+            observable.subscribe((response) => {
+                this.students.push(event.newStudent);
+            },
+            (error) => {
+                this.loggingService.error(error);
+            });
         }
     }
 
@@ -58,10 +87,24 @@ export class ClassComponent {
      * @param selectedStudentId 
      */
     public onStudentRemoved(event: { removedStudentId: string }): void {
-        let isSuccessful: boolean = this.classService.removeStudent(event.removedStudentId);
-        if (isSuccessful) {
-            this.students = this.classService.getAllStudents();
-            this.studentDetailPhoto = '';
+        
+        let observable: Observable<Response> = this.classService.removeStudent(event.removedStudentId);
+        if (observable != null) {
+            observable.subscribe((response) => {
+                let index = -1;
+                let count = -1;
+                this.students.forEach((student) => {
+                    count++;
+                    if (student.getId() === event.removedStudentId) {
+                        index = count;
+                    }
+                });
+                this.students.splice(index, 1);
+                this.studentDetailPhoto = '';
+            },
+            (error) => {
+                this.loggingService.error(error)
+            });
         }
     }
 }

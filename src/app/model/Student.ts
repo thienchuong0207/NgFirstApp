@@ -40,6 +40,10 @@ export class Student {
         return this.gender == GenderEnum.FEMALE ? 'Nữ' : 'Nam';
     }
 
+    public getGenderValue(): number {
+        return this.gender.valueOf();
+    }
+
     public setGender(gender: GenderEnum): void {
         this.gender = gender;
     }

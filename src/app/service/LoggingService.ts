@@ -2,6 +2,7 @@
  * This class is a Logging Service
  */
 export class LoggingService {
+    
     /* Write normal info to console */
     public info(message: string): void {
         console.log('%c' + message, 'color: green');

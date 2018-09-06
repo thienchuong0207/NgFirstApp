@@ -21,6 +21,7 @@ export class StudentListComponent {
      * @param studentId
      */
     public onStudentRemoved(studentId: string): void {
+        
         let data = {
             removedStudentId: studentId
         };
