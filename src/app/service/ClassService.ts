@@ -32,7 +32,7 @@ export class ClassService {
      * Get Students by Class Id
      * @param classId
      */
-    public getStudentsByClassId(classId: string): Observable<[]> {
+    public getStudentsByClassId(classId: string): Observable<{id: string, name: string, gender: number, photo: any, classId: string}[]> {
         
         let gettingStudentsByClassIdAPI = `${env.backEndApi.url}/student?classId=${classId}`;
         let headers = new Headers({

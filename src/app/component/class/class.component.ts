@@ -45,7 +45,7 @@ export class ClassComponent {
                 }
             );
             /* Get List of Students */
-            this.classService.getStudentsByClassId(this.id).subscribe((returnedStudents: []) => {
+            this.classService.getStudentsByClassId(this.id).subscribe((returnedStudents: {id: string, name: string, gender: number, photo: any, classId: string}[]) => {
                 if (returnedStudents != null && returnedStudents.length > 0) {
                     returnedStudents.forEach((returnedStudent: {id: string, name: string, gender: number, photo: any, classId: string}) => {
                         let student: Student = new Student(

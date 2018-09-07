@@ -3,12 +3,12 @@ import { GenderEnum } from '../util/GenderEnum';
 export class Student {
     
     /* Properties */
-    private id: string;
-    private name: string;
-    private gender: GenderEnum;
-    private photo: File;
-    private classId: string;
-    private photoRenderred: string;
+    private id: string = '';
+    private name: string = '';
+    private gender: GenderEnum = GenderEnum.FEMALE;
+    private photo: File = null;
+    private classId: string = '';
+    private photoRenderred: string = '';
     
     /* Constructor */
     public constructor(id: string, name: string, gender: GenderEnum, photo: File, classId: string) {

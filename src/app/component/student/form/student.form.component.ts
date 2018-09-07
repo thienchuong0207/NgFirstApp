@@ -70,6 +70,7 @@ export class StudentFormComponent {
                 this.studentDTO.setPhoto(studentPhoto);
                 this.studentPhotoPreviewDisplayed = true;
             } else {
+                this.studentDTO.setPhotoRenderred('');
                 this.studentPhotoPreviewDisplayed = false;
             }
         } catch(exception) {
