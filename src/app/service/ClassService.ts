@@ -32,7 +32,7 @@ export class ClassService {
      * Get Students by Class Id
      * @param classId
      */
-    public getStudentsByClassId(classId: string): Observable<{id: string, name: string, gender: number, photo: any, classId: string}[]> {
+    public getStudentsByClassId(classId: string): Observable<{id: string, name: string, gender: number, photo: string, classId: string}[]> {
         
         let gettingStudentsByClassIdAPI = `${env.backEndApi.url}/student?classId=${classId}`;
         let headers = new Headers({
@@ -56,9 +56,10 @@ export class ClassService {
                 id: newStudent.getId(),
                 name: newStudent.getName(),
                 gender: newStudent.getGenderValue(),
-                photo: null,
+                photo: newStudent.getPhoto(),
                 classId: newStudent.getClassId()
             });
+            console.log(requestBody);
             let studentAddingAPI = `${env.backEndApi.url}/student`;
             let headers = new Headers({
                 'Content-Type': 'application/json'

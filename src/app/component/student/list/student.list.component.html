@@ -19,7 +19,7 @@
                 <td id="studentNameContent">{{student.name}}</td>
                 <td id="studentGenderContent">{{student.getGender()}}</td>
                 <td id="studentShowPhotoContext">
-                    <img id="imgShowStudentPhoto" name="showStudentPhoto" [src]="student.photoRenderred" *ngIf="student.photoRenderred != ''"/>
+                    <img id="imgShowStudentPhoto" name="showStudentPhoto" [src]="student.photo" *ngIf="student.photo != ''"/>
                 </td>
                 <td id="studentViewDetailContent">
                     <img id="imgStudentViewDetail" src="../../../../assets/img/icon_view_detail.png" title="Xem Chi Tiết"/>

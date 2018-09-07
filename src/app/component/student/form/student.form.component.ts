@@ -25,7 +25,7 @@ export class StudentFormComponent {
 
     /* Constructor */
     constructor(private loggingService: LoggingService) {
-        this.studentDTO = new Student('', '', GenderEnum.FEMALE, null, '');
+        this.studentDTO = new Student('', '', GenderEnum.FEMALE, '', '');
     }
     
     /* Getters and Setters */
@@ -44,7 +44,7 @@ export class StudentFormComponent {
         
         try {
             this.onStudentCreatedEventEmitter.emit({newStudent: this.studentDTO});
-            this.studentDTO = new Student('', '', GenderEnum.FEMALE, null, '');
+            this.studentDTO = new Student('', '', GenderEnum.FEMALE, '', '');
         } catch(exception) {
             this.loggingService.error(exception);
         } finally {
@@ -64,13 +64,12 @@ export class StudentFormComponent {
                 let fileReader = new FileReader();
                 fileReader.onload = () => {
                     this.studentPhotoPreview = fileReader.result;
-                    this.studentDTO.setPhotoRenderred(this.studentPhotoPreview); 
+                    this.studentDTO.setPhoto(this.studentPhotoPreview);
                 };
                 fileReader.readAsDataURL(studentPhoto);
-                this.studentDTO.setPhoto(studentPhoto);
                 this.studentPhotoPreviewDisplayed = true;
             } else {
-                this.studentDTO.setPhotoRenderred('');
+                this.studentDTO.setPhoto('');
                 this.studentPhotoPreviewDisplayed = false;
             }
         } catch(exception) {

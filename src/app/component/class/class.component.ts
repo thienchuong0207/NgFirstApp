@@ -45,14 +45,14 @@ export class ClassComponent {
                 }
             );
             /* Get List of Students */
-            this.classService.getStudentsByClassId(this.id).subscribe((returnedStudents: {id: string, name: string, gender: number, photo: any, classId: string}[]) => {
+            this.classService.getStudentsByClassId(this.id).subscribe((returnedStudents: {id: string, name: string, gender: number, photo: string, classId: string}[]) => {
                 if (returnedStudents != null && returnedStudents.length > 0) {
-                    returnedStudents.forEach((returnedStudent: {id: string, name: string, gender: number, photo: any, classId: string}) => {
+                    returnedStudents.forEach((returnedStudent: {id: string, name: string, gender: number, photo: string, classId: string}) => {
                         let student: Student = new Student(
                             returnedStudent.id,
                             returnedStudent.name,
                             returnedStudent.gender == 0 ? GenderEnum.FEMALE : GenderEnum.MALE,
-                            null,
+                            returnedStudent.photo,
                             returnedStudent.classId  
                         );
                         this.students.push(student);

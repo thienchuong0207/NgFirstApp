@@ -6,12 +6,11 @@ export class Student {
     private id: string = '';
     private name: string = '';
     private gender: GenderEnum = GenderEnum.FEMALE;
-    private photo: File = null;
+    private photo: string = ''; // Base64 String
     private classId: string = '';
-    private photoRenderred: string = '';
     
     /* Constructor */
-    public constructor(id: string, name: string, gender: GenderEnum, photo: File, classId: string) {
+    public constructor(id: string, name: string, gender: GenderEnum, photo: string, classId: string) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -48,11 +47,11 @@ export class Student {
         this.gender = gender;
     }
 
-    public getPhoto(): File {
+    public getPhoto(): string {
         return this.photo;
     }
 
-    public setPhoto(photo: File): void {
+    public setPhoto(photo: string): void {
         this.photo = photo;
     }
 
@@ -62,13 +61,5 @@ export class Student {
 
     public setClassId(classId: string): void {
         this.classId = classId;
-    }
-
-    public getPhotoRenderred(): string {
-        return this.photoRenderred
-    }
-
-    public setPhotoRenderred(photoRenderred: string): void {
-        this.photoRenderred = photoRenderred;
     }
 }
