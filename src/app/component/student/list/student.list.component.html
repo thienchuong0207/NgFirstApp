@@ -14,9 +14,9 @@
                 <td id="studentIdContent">
                     <img id="imgDeleteStudent" name="deleteStudent" src="../../../../assets/img/icon_delete.png"
                         (click)="onStudentRemoved(student.id)" title="Xóa"/>
-                        {{student.id}}
+                        {{ student.id | uppercase }}
                 </td>
-                <td id="studentNameContent">{{student.name}}</td>
+                <td id="studentNameContent">{{student.name | titlecase }}</td>
                 <td id="studentGenderContent">{{student.getGender()}}</td>
                 <td id="studentShowPhotoContext">
                     <img id="imgShowStudentPhoto" name="showStudentPhoto" [src]="student.photo" *ngIf="student.photo != ''"/>
