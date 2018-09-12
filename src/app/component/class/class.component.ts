@@ -68,7 +68,7 @@ export class ClassComponent {
      * Add new student to Student List
      * @param event
      */
-    public onStudentAdded(event: { newStudent: Student }): void {
+    public onStudentAdded(event: {newStudent: Student}): void {
         
         event.newStudent.setClassId(this.id);
         let observable: Observable<Response> = this.classService.addNewStudent(event.newStudent);
@@ -86,7 +86,7 @@ export class ClassComponent {
      * Remove a student from Student List
      * @param selectedStudentId 
      */
-    public onStudentRemoved(event: { removedStudentId: string }): void {
+    public onStudentRemoved(event: {removedStudentId: string}): void {
         
         let observable: Observable<Response> = this.classService.removeStudent(event.removedStudentId);
         if (observable != null) {

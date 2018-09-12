@@ -59,7 +59,6 @@ export class ClassService {
                 photo: newStudent.getPhoto(),
                 classId: newStudent.getClassId()
             });
-            console.log(requestBody);
             let studentAddingAPI = `${env.backEndApi.url}/student`;
             let headers = new Headers({
                 'Content-Type': 'application/json'

@@ -10,6 +10,7 @@ import { StudentFormComponent } from './component/student/form/student.form.comp
 import { StudentListComponent } from './component/student/list/student.list.component';
 import { ClassService } from './service/ClassService';
 import { LoggingService } from './service/LoggingService';
+import { StudentsFilter } from './pipe/student/list/filter.pipe';
 
 const appRoutes: Routes = [
   {path: "", component: HomeComponent},
@@ -22,7 +23,8 @@ const appRoutes: Routes = [
     HomeComponent,
     ClassComponent,
     StudentFormComponent,
-    StudentListComponent
+    StudentListComponent,
+    StudentsFilter
   ],
   imports: [
     BrowserModule,

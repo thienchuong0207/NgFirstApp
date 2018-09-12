@@ -1,3 +1,7 @@
+<div class="form-group">
+    <label>Tìm theo Tên: </label>
+    <input type="text" id="txtStudentsFilter" name="txtStudentFilter" class="form-control" [ngModel]="filteredByName" (ngModelChange)="onStudentsFilteredByName($event)"/>
+</div>
 <div id="divStudentList">
     <table class="table table-striped">
         <thead>
@@ -10,7 +14,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let student of students">
+            <tr *ngFor="let student of students | studentsFilter:filteredByName">
                 <td id="studentIdContent">
                     <img id="imgDeleteStudent" name="deleteStudent" src="../../../../assets/img/icon_delete.png"
                         (click)="onStudentRemoved(student.id)" title="Xóa"/>

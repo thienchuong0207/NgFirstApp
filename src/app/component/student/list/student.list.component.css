@@ -82,3 +82,9 @@ table thead tr {
     width: 100%;
     height: auto;
 }
+
+#txtStudentsFilter {
+    width: 50%;
+    display: inline-block;
+    margin-left: 5px;
+}

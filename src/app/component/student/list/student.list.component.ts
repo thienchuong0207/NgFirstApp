@@ -10,9 +10,11 @@ import { Student } from '../../../model/Student';
 export class StudentListComponent {
 
     /* Properties */
+    private filteredByName: string = '';
+    
     @Input('students')
     private students: Student[] = [];
-    
+
     @Output()
     private onStudentRemovedEventEmitter: EventEmitter<{removedStudentId: string}> = new EventEmitter<{removedStudentId: string}>();
 
@@ -26,5 +28,13 @@ export class StudentListComponent {
             removedStudentId: studentId
         };
         this.onStudentRemovedEventEmitter.emit(data);
+    }
+
+    /**
+     * Filter Students by Name
+     * @param event
+     */
+    public onStudentsFilteredByName(value): void {
+        this.filteredByName = value;
     }
 }
