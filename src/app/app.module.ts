@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ClassComponent } from './component/class/class.component';
 import { HomeComponent } from './component/home/home.component';
@@ -11,11 +10,7 @@ import { StudentListComponent } from './component/student/list/student.list.comp
 import { ClassService } from './service/ClassService';
 import { LoggingService } from './service/LoggingService';
 import { StudentsFilter } from './pipe/student/list/filter.pipe';
-
-const appRoutes: Routes = [
-  {path: "", component: HomeComponent},
-  {path: "class", component: ClassComponent}
-];
+import { AppRoutingModule } from './app.routing.module';
 
 @NgModule({
   declarations: [
@@ -29,8 +24,8 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes),
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
   providers: [ClassService, LoggingService],
   bootstrap: [AppComponent]
