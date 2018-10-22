@@ -1,0 +1,18 @@
+label {
+    font-weight: normal;
+}
+
+.student-deletion-dialog {
+    height: auto;
+    width: auto;
+}
+
+.student-deletion-dialog .body {
+    width: auto;
+    text-align: center;
+}
+
+.student-deletion-dialog .footer {
+    width: auto;
+    text-align: center;
+}

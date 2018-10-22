@@ -17,7 +17,7 @@
             <tr *ngFor="let student of students | studentsFilter:filteredByName">
                 <td id="studentIdContent">
                     <img id="imgDeleteStudent" name="deleteStudent" src="../../../../assets/img/icon_delete.png"
-                        (click)="onStudentRemoved(student.id)" title="Xóa"/>
+                        (click)="onStudentRemoved(student)" title="Xóa"/>
                         {{ student.id | uppercase }}
                 </td>
                 <td id="studentNameContent">{{student.name | titlecase }}</td>

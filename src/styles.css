@@ -37,31 +37,6 @@ select:hover {
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px slateblue; /* For Specific Browsers that use WebKit Rendering Engine */
 }
 
-button[type="button"] {
-    background-color: cornflowerblue;
-    border-color: cornflowerblue;
-}
-
-button[type="button"]:hover {
-    background-color: cornflowerblue;
-    border-color: cornflowerblue;
-}
-
-.btn-primary {
-    background-color: cornflowerblue;
-    border-color: cornflowerblue;
-}
-
-.btn-primary:focus {
-    background-color: cornflowerblue;
-    border-color: cornflowerblue;
-}
-
-.btn-primary:hover {
-    background-color: cornflowerblue;
-    border-color: cornflowerblue;
-}
-
 #homeTab {
     color: white;
     background-color: darkslateblue;
@@ -72,4 +47,19 @@ button[type="button"]:hover {
     color: white;
     background-color: sandybrown;
     font-weight: bold;
+}
+
+.btn-primary-custom {
+    background: cornflowerblue;
+    border-color: cornflowerblue;
+}
+
+.btn-primary-custom:hover {
+    background: cornflowerblue;
+    border-color: cornflowerblue;
+}
+
+.btn-primary-custom:focus {
+    background: cornflowerblue;
+    border-color: cornflowerblue;
 }

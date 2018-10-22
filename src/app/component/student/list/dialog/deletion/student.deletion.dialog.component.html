@@ -1,0 +1,14 @@
+<p-dialog header="Xóa Học Sinh"[(visible)]="dialogProperties.display" [closable]="false" [modal]="true" [draggable]="false">
+    <div class="student-deletion-dialog">
+        <div class="body">
+            <br/>
+            <label>Bạn có muốn <font color="red">xóa</font> học sinh <font color="red">{{ studentDeletionModel.selectedStudent.name }} ({{ studentDeletionModel.selectedStudent.id }})</font> không?</label>
+            <br/>
+            <br/>
+        </div>
+        <div class="footer">
+            <button type="button" class="btn btn-primary btn-primary-custom" (click)="onNo()" style="margin-right: 5px">Không</button>
+            <button type="button" class="btn btn-danger" (click)="onYes()" style="margin-left: 5px">Đồng ý</button>
+        </div>
+    </div>
+</p-dialog>

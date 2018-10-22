@@ -5,6 +5,9 @@ import { Student as Student } from '../../model/Student';
 import { ClassService } from '../../service/ClassService';
 import { LoggingService } from '../../service/LoggingService';
 import { GenderEnum } from '../../util/GenderEnum';
+import { DialogService } from 'ng2-bootstrap-modal';
+import { StudentDeletionDialogComponent } from '../student/list/dialog/deletion/student.deletion.dialog.component';
+import { StudentDeletionModel } from '../student/list/dialog/deletion/student.deletion.dialog.model';
 
 @Component({
     selector: 'app-class',
@@ -27,12 +30,14 @@ export class ClassComponent {
     /* Dependencies */
     private classService: ClassService;
     private loggingService: LoggingService;
+    private dialogService: DialogService;
 
     /* Constructor */
-    constructor(classService: ClassService, loggingService: LoggingService) {
+    constructor(classService: ClassService, loggingService: LoggingService, dialogService: DialogService) {
         
         this.classService = classService;
         this.loggingService = loggingService;
+        this.dialogService = dialogService;
         if (classService) {
             /* Get Class Info */
             this.classService.getClassById(this.id).subscribe(
@@ -86,25 +91,43 @@ export class ClassComponent {
      * Remove a student from Student List
      * @param selectedStudentId 
      */
-    public onStudentRemoved(event: {removedStudentId: string}): void {
+    public onStudentRemoved(event: {selectedStudent: Student}): void {
         
-        let observable: Observable<Response> = this.classService.removeStudent(event.removedStudentId);
-        if (observable != null) {
-            observable.subscribe((response) => {
-                let index = -1;
-                let count = -1;
-                this.students.forEach((student) => {
-                    count++;
-                    if (student.getId() === event.removedStudentId) {
-                        index = count;
+        if (this.dialogService) {
+            let dialogProperties: {display: boolean} = {
+                display: true
+            };
+            let studentDeletionModel: StudentDeletionModel = {
+                selectedStudent: event.selectedStudent
+            };
+            let dialogInputData = {
+                dialogProperties: dialogProperties,
+                studentDeletionModel: studentDeletionModel
+            };
+            this.dialogService
+                .addDialog(StudentDeletionDialogComponent, dialogInputData)
+                .subscribe((isConfirmed) => {
+                    if (isConfirmed) {
+                        let observable: Observable<Response> = this.classService.removeStudent(event.selectedStudent.getId());
+                        if (observable != null) {
+                            observable.subscribe((response) => {
+                                let index = -1;
+                                let count = -1;
+                                this.students.forEach((student) => {
+                                    count++;
+                                    if (student.getId() === event.selectedStudent.getId()) {
+                                        index = count;
+                                    }
+                                });
+                                this.students.splice(index, 1);
+                                this.studentDetailPhoto = '';
+                            },
+                            (error) => {
+                                this.loggingService.error(error)
+                            });
+                        }
                     }
                 });
-                this.students.splice(index, 1);
-                this.studentDetailPhoto = '';
-            },
-            (error) => {
-                this.loggingService.error(error)
-            });
         }
     }
 }
