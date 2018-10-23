@@ -21,7 +21,7 @@ export class StudentDeletionDialogComponent extends DialogComponent<any, any> im
         }
     }
 
-    /* Constructor */
+    /* Constructor --> Need to inject DialogService to be able to receive input data when opening dialog */
     constructor(dialogService: DialogService) {
         super(dialogService);
     }

@@ -43,7 +43,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   providers: [
     ClassService,
     LoggingService,
-    DialogService],
+    DialogService
+  ],
   entryComponents: [
     StudentDeletionDialogComponent
   ],
