@@ -2,9 +2,14 @@
 <hr/>
 <div class="row">
     <div class="col-md-6">
-        <app-student-form (onStudentCreatedEventEmitter)="onStudentAdded($event)"></app-student-form>
+        <app-student-form (onStudentCreatedEventEmitter)="onStudentAdded($event)"
+            (onStudentPhotoUploadedEventEmitter)="onProcessingSomething($event)"
+        ></app-student-form>
     </div>
     <div class="col-md-6">
         <app-student-list [students]="students" (onStudentRemovedEventEmitter)="onStudentRemoved($event)"></app-student-list>
     </div>
+</div>
+<div class="div-progress-spinner" *ngIf="isProcessingSomething">
+    <p-progressSpinner></p-progressSpinner>
 </div>

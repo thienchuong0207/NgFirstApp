@@ -16,6 +16,8 @@ export class StudentFormComponent {
     
     /* Custom Events */
     @Output()
+    private onStudentPhotoUploadedEventEmitter: EventEmitter<{processingStatus: boolean}> = new EventEmitter<{processingStatus: boolean}>();
+    @Output()
     private onStudentCreatedEventEmitter: EventEmitter<{newStudent: Student}> = new EventEmitter<{newStudent: Student}>();
     
     /* Properties */
@@ -41,7 +43,6 @@ export class StudentFormComponent {
      * Create a new Student
      */
     public onStudentCreated(): void {
-        
         try {
             this.onStudentCreatedEventEmitter.emit({newStudent: this.studentDTO});
             this.studentDTO = new Student('', '', GenderEnum.FEMALE, '', '');
@@ -57,7 +58,10 @@ export class StudentFormComponent {
      * Preview Student's Photo
      */
     public onStudentPhotoChanged(event): void {
-        
+        let status = {
+            processingStatus: true
+        }
+        this.onStudentPhotoUploadedEventEmitter.emit(status);
         try {
             let studentPhoto = event.target.files[0];
             if (studentPhoto != null) {
@@ -65,17 +69,23 @@ export class StudentFormComponent {
                 fileReader.onload = () => {
                     this.studentPhotoPreview = fileReader.result;
                     this.studentDTO.setPhoto(this.studentPhotoPreview);
+                    status.processingStatus = false;
+                    this.onStudentPhotoUploadedEventEmitter.emit(status);
                 };
                 fileReader.readAsDataURL(studentPhoto);
                 this.studentPhotoPreviewDisplayed = true;
             } else {
                 this.studentDTO.setPhoto('');
                 this.studentPhotoPreviewDisplayed = false;
+                status.processingStatus = false;
+                this.onStudentPhotoUploadedEventEmitter.emit(status);
             }
         } catch(exception) {
             this.studentPhotoPreview = '';
             this.studentPhotoPreviewDisplayed = false;
             this.loggingService.error(exception);
+            status.processingStatus = false;
+            this.onStudentPhotoUploadedEventEmitter.emit(status);
         } finally {
             this.studentPhotoTempUploadPath = '';
         }

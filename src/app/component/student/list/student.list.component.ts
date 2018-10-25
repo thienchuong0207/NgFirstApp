@@ -23,7 +23,6 @@ export class StudentListComponent {
      * @param student
      */
     public onStudentRemoved(student: Student): void {
-        
         let data = {
             selectedStudent: student
         };

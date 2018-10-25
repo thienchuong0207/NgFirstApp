@@ -21,6 +21,9 @@ import { DialogModule } from 'primeng/dialog';
 import { BootstrapModalModule, DialogService } from 'ng2-bootstrap-modal';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+/* This module is used to display Progress Spinner */
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +41,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpModule,
     AppRoutingModule,
     DialogModule,
-    BootstrapModalModule.forRoot({container: document.body})
+    BootstrapModalModule.forRoot({container: document.body}),
+    ProgressSpinnerModule
   ],
   providers: [
     ClassService,

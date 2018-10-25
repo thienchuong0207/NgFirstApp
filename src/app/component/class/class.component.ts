@@ -23,6 +23,7 @@ export class ClassComponent {
     private name: string = '';
     private teacherName: string = '';
     private students: Student[] = [];
+    private isProcessingSomething: boolean = false;
 
     /* Display photo of selected student */
     private studentDetailPhoto: string = '';
@@ -34,38 +35,41 @@ export class ClassComponent {
 
     /* Constructor */
     constructor(classService: ClassService, loggingService: LoggingService, dialogService: DialogService) {
-        
         this.classService = classService;
         this.loggingService = loggingService;
         this.dialogService = dialogService;
         if (classService) {
+            this.isProcessingSomething = true;
             /* Get Class Info */
             this.classService.getClassById(this.id).subscribe(
                 (data: {id: string, name: string, teacherName: string}) => {
                     this.name = data.name;
                     this.teacherName = data.teacherName;
+                     /* Get List of Students */
+                    this.classService.getStudentsByClassId(this.id).subscribe((returnedStudents: {id: string, name: string, gender: number, photo: string, classId: string}[]) => {
+                        if (returnedStudents != null && returnedStudents.length > 0) {
+                            returnedStudents.forEach((returnedStudent: {id: string, name: string, gender: number, photo: string, classId: string}) => {
+                                let student: Student = new Student(
+                                    returnedStudent.id,
+                                    returnedStudent.name,
+                                    returnedStudent.gender == 0 ? GenderEnum.FEMALE : GenderEnum.MALE,
+                                    returnedStudent.photo,
+                                    returnedStudent.classId  
+                                );
+                                this.students.push(student);
+                                this.isProcessingSomething = false;
+                            })
+                        }
+                    }, (error) => {
+                        this.loggingService.error(error);
+                        this.isProcessingSomething = false;
+                    });
                 },
                 (error) => {
                     loggingService.error(error);
+                    this.isProcessingSomething = false;
                 }
             );
-            /* Get List of Students */
-            this.classService.getStudentsByClassId(this.id).subscribe((returnedStudents: {id: string, name: string, gender: number, photo: string, classId: string}[]) => {
-                if (returnedStudents != null && returnedStudents.length > 0) {
-                    returnedStudents.forEach((returnedStudent: {id: string, name: string, gender: number, photo: string, classId: string}) => {
-                        let student: Student = new Student(
-                            returnedStudent.id,
-                            returnedStudent.name,
-                            returnedStudent.gender == 0 ? GenderEnum.FEMALE : GenderEnum.MALE,
-                            returnedStudent.photo,
-                            returnedStudent.classId  
-                        );
-                        this.students.push(student);
-                    })
-                }
-            }, (error) => {
-                this.loggingService.error(error)
-            });
         }
     }
 
@@ -74,16 +78,20 @@ export class ClassComponent {
      * @param event
      */
     public onStudentAdded(event: {newStudent: Student}): void {
-        
+        this.isProcessingSomething = true;
         event.newStudent.setClassId(this.id);
         let observable: Observable<Response> = this.classService.addNewStudent(event.newStudent);
         if (observable != null) {
             observable.subscribe((response) => {
                 this.students.push(event.newStudent);
+                this.isProcessingSomething = false;
             },
             (error) => {
                 this.loggingService.error(error);
+                this.isProcessingSomething = false;
             });
+        } else {
+            this.isProcessingSomething = false;
         }
     }
 
@@ -92,7 +100,6 @@ export class ClassComponent {
      * @param selectedStudentId 
      */
     public onStudentRemoved(event: {selectedStudent: Student}): void {
-        
         if (this.dialogService) {
             let dialogProperties: {display: boolean} = {
                 display: true
@@ -108,6 +115,7 @@ export class ClassComponent {
                 .addDialog(StudentDeletionDialogComponent, dialogInputData)
                 .subscribe((isConfirmed) => {
                     if (isConfirmed) {
+                        this.isProcessingSomething = true;
                         let observable: Observable<Response> = this.classService.removeStudent(event.selectedStudent.getId());
                         if (observable != null) {
                             observable.subscribe((response) => {
@@ -121,13 +129,25 @@ export class ClassComponent {
                                 });
                                 this.students.splice(index, 1);
                                 this.studentDetailPhoto = '';
+                                this.isProcessingSomething = false;
                             },
                             (error) => {
-                                this.loggingService.error(error)
+                                this.loggingService.error(error);
+                                this.isProcessingSomething = false;
                             });
+                        } else {
+                            this.isProcessingSomething = false;
                         }
                     }
                 });
         }
+    }
+
+    /**
+     * On Processing Something
+     * @param event 
+     */
+    public onProcessingSomething(event) {
+        this.isProcessingSomething = event.processingStatus;
     }
 }
