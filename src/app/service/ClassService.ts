@@ -17,7 +17,6 @@ export class ClassService {
      * @param classId
      */
     public getClassById(classId: string): Observable<{id: string, name: string, teacherName: string}> {
-
         let gettingClassByIdAPI = `${env.backEndApi.url}/class/${classId}`;
         let headers = new Headers({
             'Content-Type': 'application/json'
@@ -32,9 +31,8 @@ export class ClassService {
      * Get Students by Class Id
      * @param classId
      */
-    public getStudentsByClassId(classId: string): Observable<{id: string, name: string, gender: number, photo: string, classId: string}[]> {
-        
-        let gettingStudentsByClassIdAPI = `${env.backEndApi.url}/student?classId=${classId}`;
+    public getStudentsByClassId(classId: string, page: number, size: number): Observable<any> {
+        let gettingStudentsByClassIdAPI = `${env.backEndApi.url}/student?classId=${classId}&page=${page}&size=${size}`;
         let headers = new Headers({
             'Content-Type': 'application/json'
         });
@@ -49,7 +47,6 @@ export class ClassService {
      * @param event
      */
     public addNewStudent(newStudent: Student): Observable<Response> {
-        
         let observable: Observable<Response> = null;
         try {
             let requestBody = JSON.stringify({
@@ -75,7 +72,6 @@ export class ClassService {
      * @param selectedStudentId 
      */
     public removeStudent(selectedStudentId: string): Observable<Response> {
-        
         let observable: Observable<Response> = null;
         try {
             if (selectedStudentId) {

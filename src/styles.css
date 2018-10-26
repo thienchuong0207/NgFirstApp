@@ -74,3 +74,11 @@ body .ui-dialog .ui-dialog-titlebar {
 body .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
     color: white !important;
 }
+
+/******************************************************/
+/*------------------- p-paginator --------------------*/
+/******************************************************/
+.ui-paginator {
+    background-color: transparent !important;
+    border: none !important;
+}

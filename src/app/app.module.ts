@@ -24,6 +24,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /* This module is used to display Progress Spinner */
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
+/* This module is used for pagination */
+import { PaginatorModule } from 'primeng/paginator';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +45,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     AppRoutingModule,
     DialogModule,
     BootstrapModalModule.forRoot({container: document.body}),
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    PaginatorModule
   ],
   providers: [
     ClassService,

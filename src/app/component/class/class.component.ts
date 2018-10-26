@@ -8,6 +8,7 @@ import { GenderEnum } from '../../util/GenderEnum';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { StudentDeletionDialogComponent } from '../student/list/dialog/deletion/student.deletion.dialog.component';
 import { StudentDeletionModel } from '../student/list/dialog/deletion/student.deletion.dialog.model';
+import { Constants } from 'src/app/util/Constants';
 
 @Component({
     selector: 'app-class',
@@ -23,6 +24,7 @@ export class ClassComponent {
     private name: string = '';
     private teacherName: string = '';
     private students: Student[] = [];
+    private totalStudents: number = 0;
     private isProcessingSomething: boolean = false;
 
     /* Display photo of selected student */
@@ -46,8 +48,10 @@ export class ClassComponent {
                     this.name = data.name;
                     this.teacherName = data.teacherName;
                      /* Get List of Students */
-                    this.classService.getStudentsByClassId(this.id).subscribe((returnedStudents: {id: string, name: string, gender: number, photo: string, classId: string}[]) => {
-                        if (returnedStudents != null && returnedStudents.length > 0) {
+                    this.classService.getStudentsByClassId(this.id, 0, Constants.STUDENT.NO_OF_STUDENTS_PER_PAGE).subscribe((jsonData) => {
+                        if (jsonData && jsonData.total > 0) {
+                            this.totalStudents = jsonData.total;
+                            let returnedStudents = jsonData.students;
                             returnedStudents.forEach((returnedStudent: {id: string, name: string, gender: number, photo: string, classId: string}) => {
                                 let student: Student = new Student(
                                     returnedStudent.id,
@@ -57,8 +61,10 @@ export class ClassComponent {
                                     returnedStudent.classId  
                                 );
                                 this.students.push(student);
-                                this.isProcessingSomething = false;
-                            })
+                            });
+                            this.isProcessingSomething = false;
+                        } else {
+                            this.isProcessingSomething = false;
                         }
                     }, (error) => {
                         this.loggingService.error(error);
@@ -149,5 +155,38 @@ export class ClassComponent {
      */
     public onProcessingSomething(event) {
         this.isProcessingSomething = event.processingStatus;
+    }
+
+    /**
+     * On Student Page Change
+     * @param event
+     */
+    public onStudentPageChange(event) {
+        this.isProcessingSomething = true;
+        let page = event.page;
+        let size = event.size;
+        this.classService.getStudentsByClassId(this.id, page, size).subscribe((jsonData) => {
+            if (jsonData && jsonData.total > 0) {
+                this.students = [];
+                this.totalStudents = jsonData.total;
+                let returnedStudents = jsonData.students;
+                returnedStudents.forEach((returnedStudent: {id: string, name: string, gender: number, photo: string, classId: string}) => {
+                    let student: Student = new Student(
+                        returnedStudent.id,
+                        returnedStudent.name,
+                        returnedStudent.gender == 0 ? GenderEnum.FEMALE : GenderEnum.MALE,
+                        returnedStudent.photo,
+                        returnedStudent.classId  
+                    );
+                    this.students.push(student);
+                });
+                this.isProcessingSomething = false;
+            } else {
+                this.isProcessingSomething = false;
+            }
+        }, (error) => {
+            this.loggingService.error(error);
+            this.isProcessingSomething = false;
+        });
     }
 }

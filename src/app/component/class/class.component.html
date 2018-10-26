@@ -7,9 +7,12 @@
         ></app-student-form>
     </div>
     <div class="col-md-6">
-        <app-student-list [students]="students" (onStudentRemovedEventEmitter)="onStudentRemoved($event)"></app-student-list>
+        <app-student-list [totalStudents]="totalStudents" [students]="students"
+            (onStudentRemovedEventEmitter)="onStudentRemoved($event)"
+            (onPageChangeEventEmitter)="onStudentPageChange($event)"
+        ></app-student-list>
     </div>
 </div>
-<div class="div-progress-spinner" *ngIf="isProcessingSomething">
+<div class="divProgressSpinner" *ngIf="isProcessingSomething">
     <p-progressSpinner></p-progressSpinner>
 </div>
