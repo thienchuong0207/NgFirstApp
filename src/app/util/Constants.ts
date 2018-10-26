@@ -3,6 +3,6 @@
  */
 export const Constants = {
     STUDENT: {
-        NO_OF_STUDENTS_PER_PAGE: 6
+        NO_OF_STUDENTS_PER_PAGE: 5
     }
 }

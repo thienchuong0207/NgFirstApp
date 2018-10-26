@@ -33,5 +33,5 @@
     </table>
 </div>
 <div id="divStudentListPaginator" *ngIf="isPaginatorDisplayed()">
-    <p-paginator [rows]="pageSize" [totalRecords]="totalStudents" pageLinkSize="5" (onPageChange)="onPageChange($event)"></p-paginator>
+    <p-paginator [rows]="pageSize" [totalRecords]="totalStudents" [first]="firstStudentIndex" pageLinkSize="5" (onPageChange)="onPageChange($event)"></p-paginator>
 </div>

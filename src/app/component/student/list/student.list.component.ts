@@ -12,13 +12,16 @@ export class StudentListComponent {
 
     /* Properties */
     private filteredByName: string = '';
-    private pageSize: number = 6;
+    private pageSize: number = Constants.STUDENT.NO_OF_STUDENTS_PER_PAGE;
     
     @Input('totalStudents')
     private totalStudents: number = 0;
 
     @Input('students')
     private students: Student[] = [];
+
+    @Input('firstStudentIndex')
+    private firstStudentIndex: number = 0;
 
     @Output()
     private onPageChangeEventEmitter: EventEmitter<{page: number, size: number}> = new EventEmitter<{page: number, size: number}>();

@@ -9,6 +9,7 @@ import { DialogService } from 'ng2-bootstrap-modal';
 import { StudentDeletionDialogComponent } from '../student/list/dialog/deletion/student.deletion.dialog.component';
 import { StudentDeletionModel } from '../student/list/dialog/deletion/student.deletion.dialog.model';
 import { Constants } from 'src/app/util/Constants';
+import { timingSafeEqual } from 'crypto';
 
 @Component({
     selector: 'app-class',
@@ -19,13 +20,20 @@ import { Constants } from 'src/app/util/Constants';
 })
 export class ClassComponent {
 
-    /* Properties */
+    /* Class-related Infomation */
     private id: string = 'C01';
     private name: string = '';
     private teacherName: string = '';
+
+    /* Flag Variable to Determine whether Spinner is Displayed or not */
+    private isProcessingSomething: boolean = false;
+
+    /* Student-related Information, also Includes Paginator-related Information */
     private students: Student[] = [];
     private totalStudents: number = 0;
-    private isProcessingSomething: boolean = false;
+    private currentStudentPage: number = -1;
+    private totalStudentPages: number = 0;
+    private firstStudentIndex: number = 0;
 
     /* Display photo of selected student */
     private studentDetailPhoto: string = '';
@@ -47,29 +55,11 @@ export class ClassComponent {
                 (data: {id: string, name: string, teacherName: string}) => {
                     this.name = data.name;
                     this.teacherName = data.teacherName;
-                     /* Get List of Students */
-                    this.classService.getStudentsByClassId(this.id, 0, Constants.STUDENT.NO_OF_STUDENTS_PER_PAGE).subscribe((jsonData) => {
-                        if (jsonData && jsonData.total > 0) {
-                            this.totalStudents = jsonData.total;
-                            let returnedStudents = jsonData.students;
-                            returnedStudents.forEach((returnedStudent: {id: string, name: string, gender: number, photo: string, classId: string}) => {
-                                let student: Student = new Student(
-                                    returnedStudent.id,
-                                    returnedStudent.name,
-                                    returnedStudent.gender == 0 ? GenderEnum.FEMALE : GenderEnum.MALE,
-                                    returnedStudent.photo,
-                                    returnedStudent.classId  
-                                );
-                                this.students.push(student);
-                            });
-                            this.isProcessingSomething = false;
-                        } else {
-                            this.isProcessingSomething = false;
-                        }
-                    }, (error) => {
-                        this.loggingService.error(error);
-                        this.isProcessingSomething = false;
-                    });
+                    let page = 0;
+                    let size = Constants.STUDENT.NO_OF_STUDENTS_PER_PAGE;
+                    this.currentStudentPage = page;
+                    /* Load Students List */
+                    this.loadStudentsList(page, size);
                 },
                 (error) => {
                     loggingService.error(error);
@@ -81,7 +71,7 @@ export class ClassComponent {
 
     /**
      * Add new student to Student List
-     * @param event
+     * @param event: {newStudent: Student}
      */
     public onStudentAdded(event: {newStudent: Student}): void {
         this.isProcessingSomething = true;
@@ -89,8 +79,13 @@ export class ClassComponent {
         let observable: Observable<Response> = this.classService.addNewStudent(event.newStudent);
         if (observable != null) {
             observable.subscribe((response) => {
-                this.students.push(event.newStudent);
-                this.isProcessingSomething = false;
+                let currentStudentsPerPage = this.students.length;
+                if (currentStudentsPerPage == Constants.STUDENT.NO_OF_STUDENTS_PER_PAGE) {
+                    this.currentStudentPage++;
+                }
+                let page = this.currentStudentPage;
+                let size = Constants.STUDENT.NO_OF_STUDENTS_PER_PAGE;
+                this.loadStudentsList(page, size);
             },
             (error) => {
                 this.loggingService.error(error);
@@ -103,7 +98,7 @@ export class ClassComponent {
 
     /**
      * Remove a student from Student List
-     * @param selectedStudentId 
+     * @param event: {selectedStudent: Student} 
      */
     public onStudentRemoved(event: {selectedStudent: Student}): void {
         if (this.dialogService) {
@@ -125,17 +120,13 @@ export class ClassComponent {
                         let observable: Observable<Response> = this.classService.removeStudent(event.selectedStudent.getId());
                         if (observable != null) {
                             observable.subscribe((response) => {
-                                let index = -1;
-                                let count = -1;
-                                this.students.forEach((student) => {
-                                    count++;
-                                    if (student.getId() === event.selectedStudent.getId()) {
-                                        index = count;
-                                    }
-                                });
-                                this.students.splice(index, 1);
                                 this.studentDetailPhoto = '';
-                                this.isProcessingSomething = false;
+                                if (this.students.length == 1) {
+                                    this.currentStudentPage--;
+                                }
+                                let page = this.currentStudentPage < 0 ? 0 : this.currentStudentPage;
+                                let size = Constants.STUDENT.NO_OF_STUDENTS_PER_PAGE;
+                                this.loadStudentsList(page, size);
                             },
                             (error) => {
                                 this.loggingService.error(error);
@@ -162,13 +153,26 @@ export class ClassComponent {
      * @param event
      */
     public onStudentPageChange(event) {
-        this.isProcessingSomething = true;
         let page = event.page;
         let size = event.size;
+        if (page != this.currentStudentPage) {
+            this.currentStudentPage = page;
+            this.isProcessingSomething = true;
+            this.loadStudentsList(page, size);
+        }
+    }
+
+    /**
+     * Load a List of Students
+     * @param page: Selected Page Index
+     * @param size: Number of Students per Page
+     */
+    private loadStudentsList(page: number, size: number): void {
         this.classService.getStudentsByClassId(this.id, page, size).subscribe((jsonData) => {
-            if (jsonData && jsonData.total > 0) {
-                this.students = [];
+            if (jsonData) {
+                let shadowStudents = [];
                 this.totalStudents = jsonData.total;
+                this.totalStudentPages = jsonData.totalPages;
                 let returnedStudents = jsonData.students;
                 returnedStudents.forEach((returnedStudent: {id: string, name: string, gender: number, photo: string, classId: string}) => {
                     let student: Student = new Student(
@@ -176,12 +180,17 @@ export class ClassComponent {
                         returnedStudent.name,
                         returnedStudent.gender == 0 ? GenderEnum.FEMALE : GenderEnum.MALE,
                         returnedStudent.photo,
-                        returnedStudent.classId  
+                        returnedStudent.classId
                     );
-                    this.students.push(student);
+                    shadowStudents.push(student);
                 });
+                this.students = shadowStudents;
+                this.firstStudentIndex = page * size;
                 this.isProcessingSomething = false;
             } else {
+                this.totalStudents = 0;
+                this.totalStudentPages = 0
+                this.students = [];
                 this.isProcessingSomething = false;
             }
         }, (error) => {
