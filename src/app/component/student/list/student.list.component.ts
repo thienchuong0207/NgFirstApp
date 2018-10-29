@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
-import { Student } from '../../../model/Student';
+import { DialogService } from 'ng2-bootstrap-modal';
 import { Constants } from 'src/app/util/Constants';
+import { Student } from '../../../model/Student';
+import { StudentImageViewerDialogComponent } from './dialog/imgViewer/student.image.viewer.dialog.compoent';
 
 @Component({
     selector: 'app-student-list',
@@ -14,6 +16,9 @@ export class StudentListComponent {
     private filteredByName: string = '';
     private pageSize: number = Constants.STUDENT.NO_OF_STUDENTS_PER_PAGE;
     
+    /* Dependencies */
+    private dialogService: DialogService = null;
+
     @Input('totalStudents')
     private totalStudents: number = 0;
 
@@ -28,6 +33,11 @@ export class StudentListComponent {
     
     @Output()
     private onStudentRemovedEventEmitter: EventEmitter<{selectedStudent: Student}> = new EventEmitter<{selectedStudent: Student}>();
+
+    /* Constructor */
+    constructor(dialogService: DialogService) {
+        this.dialogService = dialogService;
+    }
 
     /**
      * Remove a Student
@@ -71,5 +81,25 @@ export class StudentListComponent {
             size: size
         }
         this.onPageChangeEventEmitter.emit(data);
+    }
+
+    /**
+     * View Student Image in Dialog
+     * @param imageDataURL
+     */
+    public onImageViewing(imageDataURL: string): void {
+        if (this.dialogService) {
+            let dialogProperties: {display: boolean} = {
+                display: true
+            };
+            let dialogInputData: {imageDataURL: string} = {
+                imageDataURL: imageDataURL
+            }
+            let data = {
+                dialogProperties: dialogProperties,
+                dialogInputData: dialogInputData
+            }
+            this.dialogService.addDialog(StudentImageViewerDialogComponent, data).subscribe(() => {});
+        }
     }
 }

@@ -26,6 +26,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 /* This module is used for pagination */
 import { PaginatorModule } from 'primeng/paginator';
+import { StudentImageViewerDialogComponent } from './component/student/list/dialog/imgViewer/student.image.viewer.dialog.compoent';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PaginatorModule } from 'primeng/paginator';
     StudentFormComponent,
     StudentListComponent,
     StudentsFilter,
-    StudentDeletionDialogComponent
+    StudentDeletionDialogComponent,
+    StudentImageViewerDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,8 @@ import { PaginatorModule } from 'primeng/paginator';
     DialogService
   ],
   entryComponents: [
-    StudentDeletionDialogComponent
+    StudentDeletionDialogComponent,
+    StudentImageViewerDialogComponent
   ],
   bootstrap: [AppComponent]
 })

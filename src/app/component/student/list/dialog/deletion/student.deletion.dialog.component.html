@@ -1,6 +1,7 @@
-<p-dialog header="Xóa Học Sinh"[(visible)]="dialogProperties.display" [closable]="false" [modal]="true" [draggable]="false">
+<p-dialog header="Xóa Học Sinh" [(visible)]="dialogProperties.display" [closable]="false" [modal]="true" [draggable]="false">
     <div class="student-deletion-dialog">
         <div class="body">
+            <br/>
             <label>Bạn có muốn <font color="red">xóa</font> học sinh <font color="red">{{ studentDeletionModel.selectedStudent.name }} ({{ studentDeletionModel.selectedStudent.id }})</font> không?</label>
             <br/>
             <br/>

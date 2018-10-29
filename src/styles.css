@@ -68,7 +68,7 @@ select:hover {
 /*--------------------- p-dialog ---------------------*/
 /******************************************************/
 body .ui-dialog .ui-dialog-titlebar {
-    background-color: darkslateblue !important;
+    display: none !important;
 }
 
 body .ui-dialog .ui-dialog-titlebar .ui-dialog-title {

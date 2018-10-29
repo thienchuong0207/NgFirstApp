@@ -9,7 +9,6 @@ import { DialogService } from 'ng2-bootstrap-modal';
 import { StudentDeletionDialogComponent } from '../student/list/dialog/deletion/student.deletion.dialog.component';
 import { StudentDeletionModel } from '../student/list/dialog/deletion/student.deletion.dialog.model';
 import { Constants } from 'src/app/util/Constants';
-import { timingSafeEqual } from 'crypto';
 
 @Component({
     selector: 'app-class',

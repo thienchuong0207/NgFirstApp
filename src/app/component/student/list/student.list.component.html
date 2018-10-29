@@ -26,7 +26,7 @@
                     <img id="imgShowStudentPhoto" name="showStudentPhoto" [src]="student.photo" *ngIf="student.photo != ''"/>
                 </td>
                 <td id="studentViewDetailContent">
-                    <img id="imgStudentViewDetail" src="../../../../assets/img/icon_view_detail.png" title="Xem Chi Tiết"/>
+                    <img id="imgStudentViewDetail" src="../../../../assets/img/icon_view_detail.png" title="Xem Chi Tiết" (click)="onImageViewing(student.getPhoto())"/>
                 </td>
             </tr>
         </tbody>
