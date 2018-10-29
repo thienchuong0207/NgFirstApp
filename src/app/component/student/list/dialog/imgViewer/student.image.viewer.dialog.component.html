@@ -1,6 +1,7 @@
 <p-dialog [visible]="dialogProperties.display" modal="true" closable="false" draggable="false">
     <div class="studentImageViewer">
         <img class="studentImage" *ngIf="dialogInputData.imageDataURL != ''" [src]="dialogInputData.imageDataURL"/>
+        <!-- <div class="studentImage"></div> -->
     </div>
     <div class="footer">
         <button type="button" class="btn btn-primary btn-primary-custom" (click)="onClose()">Đóng</button>

@@ -68,11 +68,11 @@ select:hover {
 /*--------------------- p-dialog ---------------------*/
 /******************************************************/
 body .ui-dialog .ui-dialog-titlebar {
-    display: none !important;
+    display: none;
 }
 
-body .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
-    color: white !important;
+body .ui-dialog .ui-dialog-content {
+    background-color: white;
 }
 
 /******************************************************/
