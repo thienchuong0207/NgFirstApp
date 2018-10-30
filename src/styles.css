@@ -67,6 +67,11 @@ select:hover {
 /******************************************************/
 /*--------------------- p-dialog ---------------------*/
 /******************************************************/
+div[role="dialog"] {
+    min-width: 0 !important;
+    min-height: 0 !important;
+}
+
 body .ui-dialog .ui-dialog-titlebar {
     display: none;
 }
