@@ -8,6 +8,8 @@ import { HomeComponent } from './component/home/home.component';
 import { StudentFormComponent } from './component/student/form/student.form.component';
 import { StudentListComponent } from './component/student/list/student.list.component';
 import { StudentDeletionDialogComponent } from './component/student/list/dialog/deletion/student.deletion.dialog.component';
+import { SignInComponent } from './component/signin/signin.component'
+import { LandingComponent } from './component/landing/landing.component'
 import { ClassService } from './service/ClassService';
 import { LoggingService } from './service/LoggingService';
 import { StudentsFilter } from './pipe/student/list/filter.pipe';
@@ -37,7 +39,9 @@ import { StudentImageViewerDialogComponent } from './component/student/list/dial
     StudentListComponent,
     StudentsFilter,
     StudentDeletionDialogComponent,
-    StudentImageViewerDialogComponent
+    StudentImageViewerDialogComponent,
+    SignInComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,
