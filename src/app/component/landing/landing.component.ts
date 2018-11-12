@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/service/AuthService';
 
 /**
  * Landing-Page Component
@@ -12,9 +13,19 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class LandingComponent implements AfterViewInit {
 
-    constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+    constructor(private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService) {}
 
     ngAfterViewInit() {
         this.router.navigate([{outlets: {landingRouterOutlet: 'home'}}], {relativeTo: this.activatedRoute});
+    }
+
+    /**
+     * Sign Out of Application
+     */
+    public signOut() {
+        if (this.authService.hasSignedIn()) {
+            this.authService.signOut();
+            this.router.navigate(['/signin'], {relativeTo: this.activatedRoute});
+        }
     }
 }
