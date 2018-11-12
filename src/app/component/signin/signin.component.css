@@ -1,9 +1,36 @@
 .divSignInContainer {
+    position: relative;
     width: 100vw;
     height: 100vh;
+}
+
+.divSignInContent {
+    position: absolute;
+    top: 10vh;
+    left: 35vw;
+    width: 30vw;
+    overflow: auto;
+    padding: 50px;
+    background-color: rgba(225, 225, 225, 0.4);
+    border-radius: 1%;
+}
+
+.divSignInButtons {
     text-align: center;
 }
 
 .btnSignIn {
-    margin-top: 40vh;
+    background-color: rgba(72, 61, 139, 1.0);
+    border-color: rgba(72, 61, 139, 1.0);
+    width: 100%;
+}
+
+.btnSignIn:focus {
+    background-color: rgba(72, 61, 139, 1.0);
+    border-color: rgba(72, 61, 139, 1.0);
+}
+
+.divSignUp {
+    margin-top: 10px;
+    text-align: center;
 }

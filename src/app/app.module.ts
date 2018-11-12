@@ -12,6 +12,8 @@ import { SignInComponent } from './component/signin/signin.component'
 import { LandingComponent } from './component/landing/landing.component'
 import { ClassService } from './service/ClassService';
 import { LoggingService } from './service/LoggingService';
+import { AuthService } from './service/AuthService';
+import { AuthGuard } from './guard/AuthGuard';
 import { StudentsFilter } from './pipe/student/list/filter.pipe';
 import { AppRoutingModule } from './app.routing.module';
 
@@ -57,6 +59,8 @@ import { StudentImageViewerDialogComponent } from './component/student/list/dial
   providers: [
     ClassService,
     LoggingService,
+    AuthService,
+    AuthGuard,
     DialogService
   ],
   entryComponents: [

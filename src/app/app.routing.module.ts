@@ -4,6 +4,7 @@ import { HomeComponent } from './component/home/home.component';
 import { ClassComponent } from './component/class/class.component';
 import { SignInComponent } from './component/signin/signin.component';
 import { LandingComponent } from './component/landing/landing.component'
+import { AuthGuard } from './guard/AuthGuard';
 
 const appRoutes: Routes = [
     {
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
     {
         path: 'landing',
         component: LandingComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: 'home',
