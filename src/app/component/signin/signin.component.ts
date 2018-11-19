@@ -22,7 +22,7 @@ export class SignInComponent {
      * Sign-In
      */
     public onSignIn():void {
-        let isValidUser: boolean = this.authService.authenticateUser(this.username, this.password);
+        let isValidUser: boolean = this.authService.authenticate(this.username, this.password);
         if (isValidUser) {
             this.router.navigate(['../landing'], {relativeTo: this.activatedRoute});
         } else {

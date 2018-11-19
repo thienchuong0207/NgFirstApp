@@ -17,11 +17,11 @@ export class AuthService {
     }
 
     /**
-     * Authenticate User
+     * Authenticate
      * @param username
      * @param password 
      */
-    public authenticateUser(username: string, password: string): boolean {
+    public authenticate(username: string, password: string): boolean {
         let isValidUser: boolean = false;
         if (username === 'thienchuong0207@gmail.com' && password === 'admin') {
             this.username = username;
