@@ -32,6 +32,9 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { PaginatorModule } from 'primeng/paginator';
 import { StudentImageViewerDialogComponent } from './component/student/list/dialog/imgViewer/student.image.viewer.dialog.compoent';
 
+/* This module is used for WEB STORAGE (including: LocalStorage and Session Storage) */
+import { StorageServiceModule, StorageService } from 'angular-webstorage-service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +57,8 @@ import { StudentImageViewerDialogComponent } from './component/student/list/dial
     DialogModule,
     BootstrapModalModule.forRoot({container: document.body}),
     ProgressSpinnerModule,
-    PaginatorModule
+    PaginatorModule,
+    StorageServiceModule
   ],
   providers: [
     ClassService,

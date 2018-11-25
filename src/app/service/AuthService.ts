@@ -1,41 +1,59 @@
+import { Injectable, Inject } from "@angular/core";
+import { Http, Headers, RequestOptionsArgs, Response } from "@angular/http";
+import { environment as env } from "src/environments/environment";
+import { Observable } from "rxjs";
+import { StorageService, SESSION_STORAGE, isStorageAvailable } from 'angular-webstorage-service';
+import { Constants } from "../util/Constants";
+
 /**
  * Auth Service
  */
+@Injectable()
 export class AuthService {
 
-    private username: string = null;
-    private password: string = null;
-
-    /**
-     * Check If User Has Signed-In
-     */
-    public hasSignedIn(): boolean {
-        if (this.username != null && this.password != null) {
-            return true;
-        }
-        return false;
-    }
+    constructor(private http: Http,
+        @Inject(SESSION_STORAGE) private storageService: StorageService) {}
 
     /**
      * Authenticate
      * @param username
      * @param password 
      */
-    public authenticate(username: string, password: string): boolean {
-        let isValidUser: boolean = false;
-        if (username === 'thienchuong0207@gmail.com' && password === 'admin') {
-            this.username = username;
-            this.password = password;
-            isValidUser = true;
+    public authenticate(username: string, password: string): Observable<Response> {
+        let url: string = `${env.backEndApi.url}/auth`;
+        let body: object = {
+            username: username,
+            password: password
         }
-        return isValidUser;
+        let headers: Headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+        let options: RequestOptionsArgs = {
+            headers: headers
+        };
+        return this.http.post(url, JSON.stringify(body), options);
     }
 
     /**
-     * Sign Out
+     * Check whether User has Signed-in or not
      */
-    public signOut(): void {
-        this.username == null;
-        this.password == null;
+    public hasSignedIn(): boolean {
+        let result: boolean = false;
+        if (isStorageAvailable(sessionStorage) && this.storageService.get(Constants.SIGNIN.STORAGE_KEY) != null) {
+            result = true;
+        }
+        return result;
     }
+
+    /**
+     * Sign-out of Application
+     */
+    public signOut(): boolean {
+        let result: boolean = false;
+        if (isStorageAvailable(sessionStorage) && this.storageService.get(Constants.SIGNIN.STORAGE_KEY) != null) {
+            this.storageService.remove(Constants.SIGNIN.STORAGE_KEY);
+            result = true;
+        }
+        return result;
+    } 
 }

@@ -20,12 +20,13 @@ export class LandingComponent implements AfterViewInit {
     }
 
     /**
-     * Sign Out of Application
+     * Sign-out of Application
      */
-    public signOut() {
+    public OnSignOut() {
         if (this.authService.hasSignedIn()) {
-            this.authService.signOut();
-            this.router.navigate(['/signin'], {relativeTo: this.activatedRoute});
+            if (this.authService.signOut()) {
+                this.router.navigate(['/signin'], {relativeTo: this.activatedRoute});
+            }
         }
     }
 }
