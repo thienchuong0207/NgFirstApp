@@ -21,14 +21,14 @@
 }
 
 .btnSignIn {
-    background-color: rgba(72, 61, 139, 1.0);
-    border-color: rgba(72, 61, 139, 1.0);
+    background-color: rgba(46, 141, 59, 1.0);
+    border-color: rgba(46, 141, 59, 1.0);
     width: 100%;
 }
 
 .btnSignIn:focus {
-    background-color: rgba(72, 61, 139, 1.0);
-    border-color: rgba(72, 61, 139, 1.0);
+    background-color: rgba(46, 141, 59, 1.0);
+    border-color: rgba(46, 141, 59, 1.0);
 }
 
 .divSignUp {

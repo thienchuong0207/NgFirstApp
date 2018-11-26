@@ -44,9 +44,9 @@ select:hover {
     right: 0;
     bottom: 0;
     background-image: url('assets/img/app_background.jpg');
-    background-repeat: repeat;
+    background-repeat: no-repeat;
     background-size: cover;
-    opacity: 0.4;
+    opacity: 1.0;
 }
 
 #homeTab {
