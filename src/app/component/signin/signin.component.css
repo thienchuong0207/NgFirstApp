@@ -4,12 +4,22 @@
     height: 100vh;
 }
 
-.divSignInContent {
+.divSignIn {
     position: absolute;
     top: 10vh;
     left: 35vw;
     width: 30vw;
-    overflow: auto;
+}
+
+.divSignInError {
+    position: relative;
+    background-color: rgba(255, 0, 0, 0.6);
+    color: white;
+    text-align: center;
+}
+
+.divSignInContent {
+    position: relative;
     padding: 50px;
     background-color: rgba(225, 225, 225, 0.4);
     border-radius: 1%;

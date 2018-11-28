@@ -1,25 +1,28 @@
 <div class="divSignInContainer">
     <div class="divAppBackground"></div>
-    <div class="divSignInContent">
-        <form>
-            <div class="input-group form-group">
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-user"></span>
+    <div class="divSignIn">
+        <div class="divSignInError" *ngIf="hasError">{{errorMessage}}</div>
+        <div class="divSignInContent">
+            <form>
+                <div class="input-group form-group">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </div>
+                    <input type="email" id="username" name="username" placeholder="Tài Khoản" class="form-control" [(ngModel)]="username" required/>
                 </div>
-                <input type="email" id="username" name="username" placeholder="Tài khoản" class="form-control" [(ngModel)]="username" required/>
-            </div>
-            <div class="input-group form-group">
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
+                <div class="input-group form-group">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                    <input type="password" id="password" name="password" placeholder="Mật Khẩu" class="form-control" [(ngModel)]="password" required/>
                 </div>
-                <input type="password" id="password" name="password" placeholder="Mật Khẩu" class="form-control" [(ngModel)]="password" required/>
-            </div>
-            <div class="divSignInButtons">
-                <button type="button" class="btn btn-primary btnSignIn" (click)="onSignIn()">Đăng Nhập</button>
-            </div>
-            <div class="divSignUp">
-                Bạn chưa có tài khoản? <font color="blue">Đăng ký</font>
-            </div>
-        </form>
+                <div class="divSignInButtons">
+                    <button type="button" class="btn btn-primary btnSignIn" (click)="onSignIn()">Đăng Nhập</button>
+                </div>
+                <div class="divSignUp">
+                    Bạn chưa có tài khoản? <font color="blue">Đăng ký</font>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

@@ -19,6 +19,9 @@ export class SignInComponent {
 
     private username: string = null;
     private password: string = null;
+    private hasError: boolean = false;
+    private errorMessage: string = '';
+
 
     constructor(private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -34,16 +37,23 @@ export class SignInComponent {
             (response: Response) => {
                 if (response.ok) {
                     if (isStorageAvailable(sessionStorage)) {
+                        this.hasError = false;
+                        this.errorMessage = '';
                         this.storageService.set(Constants.SIGNIN.STORAGE_KEY, this.username);
                         this.router.navigate(['../landing'], {relativeTo: this.activatedRoute});
                     } else {
-                        this.loggingService.error(`Session Storage is not available.`);
-                        this.username = '';
-                        this.password = '';
+                        this.hasError = true;
+                        this.errorMessage = 'Lỗi Hệ Thống. Vui Lòng Thử Lại!';
                     }
                 }
             }, (error) => {
-                this.loggingService.error(`Exception in Authentication: ${error}`);
+                if (error instanceof Response && error.status === 401) {
+                    this.password = '';
+                    this.hasError = true;
+                    this.errorMessage = 'Thông Tin Đăng Nhập Không Hợp Lệ!';
+                } else {
+                    this.loggingService.error(`Error in SignIn: ${error}`);
+                }
             }
         );
     }
