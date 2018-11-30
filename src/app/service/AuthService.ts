@@ -2,7 +2,7 @@ import { Injectable, Inject } from "@angular/core";
 import { Http, Headers, RequestOptionsArgs, Response } from "@angular/http";
 import { environment as env } from "src/environments/environment";
 import { Observable } from "rxjs";
-import { StorageService, SESSION_STORAGE, isStorageAvailable } from 'angular-webstorage-service';
+import { StorageService, LOCAL_STORAGE, isStorageAvailable } from 'angular-webstorage-service';
 import { Constants } from "../util/Constants";
 
 /**
@@ -12,7 +12,7 @@ import { Constants } from "../util/Constants";
 export class AuthService {
 
     constructor(private http: Http,
-        @Inject(SESSION_STORAGE) private storageService: StorageService) {}
+        @Inject(LOCAL_STORAGE) private storageService: StorageService) {}
 
     /**
      * Authenticate
@@ -39,7 +39,7 @@ export class AuthService {
      */
     public hasSignedIn(): boolean {
         let result: boolean = false;
-        if (isStorageAvailable(sessionStorage) && this.storageService.get(Constants.SIGNIN.STORAGE_KEY) != null) {
+        if (isStorageAvailable(localStorage) && this.storageService.get(Constants.SIGNIN.STORAGE_KEY) != null) {
             result = true;
         }
         return result;
@@ -50,7 +50,7 @@ export class AuthService {
      */
     public signOut(): boolean {
         let result: boolean = false;
-        if (isStorageAvailable(sessionStorage) && this.storageService.get(Constants.SIGNIN.STORAGE_KEY) != null) {
+        if (isStorageAvailable(localStorage) && this.storageService.get(Constants.SIGNIN.STORAGE_KEY) != null) {
             this.storageService.remove(Constants.SIGNIN.STORAGE_KEY);
             result = true;
         }
