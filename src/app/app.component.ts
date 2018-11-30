@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnDestroy, Inject } from '@angular/core';
+import { Component, ViewEncapsulation, Inject, HostListener } from '@angular/core';
 import { StorageService, isStorageAvailable, LOCAL_STORAGE} from 'angular-webstorage-service';
 
 @Component({
@@ -7,16 +7,14 @@ import { StorageService, isStorageAvailable, LOCAL_STORAGE} from 'angular-websto
   styleUrls: ['./app.component.css'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent {
 
   title = 'app';
 
   constructor(@Inject(LOCAL_STORAGE) private storageService: StorageService) {}
 
-  /**
-   * OnDestroy: Clear all Keys in Local Storage
-   */
-  ngOnDestroy() {
+  @HostListener('window:unload', ['$event'])
+  onWindowUnload() {
     if (isStorageAvailable(localStorage) && localStorage.length > 0) {
       localStorage.clear();
     }
