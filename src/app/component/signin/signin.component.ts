@@ -41,15 +41,20 @@ export class SignInComponent {
                         this.storageService.set(Constants.SIGNIN.STORAGE_KEY, this.username);
                         this.router.navigate(['../landing'], {relativeTo: this.activatedRoute});
                     } else {
+                        this.password = '';
                         this.hasError = true;
                         this.errorMessage = 'Lỗi Hệ Thống. Vui Lòng Thử Lại!';
                     }
                 }
             }, (error) => {
-                if (error instanceof Response && error.status === 401) {
+                if (error instanceof Response) {
                     this.password = '';
                     this.hasError = true;
-                    this.errorMessage = 'Thông Tin Đăng Nhập Không Hợp Lệ!';
+                    if (error.status === 401) {
+                        this.errorMessage = 'Thông Tin Đăng Nhập Không Hợp Lệ!';
+                    } else if (error.status === 0) {
+                        this.errorMessage = 'Lỗi Hệ Thống. Vui Lòng Thử Lại!';
+                    }
                 } else {
                     this.loggingService.error(`Error in SignIn: ${error}`);
                 }
